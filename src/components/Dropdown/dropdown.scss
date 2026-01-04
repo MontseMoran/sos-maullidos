@@ -1,0 +1,11 @@
+.dropdown {
+  position: relative;
+}
+
+.drop-panel {
+  display: none;
+}
+
+.drop-panel.open {
+  display: block;
+}
