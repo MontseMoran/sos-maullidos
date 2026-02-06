@@ -4,19 +4,27 @@ import LanguageDetector from "i18next-browser-languagedetector";
 
 import esCommon from "./locales/es/common.json";
 import catCommon from "./locales/cat/common.json";
+import esHome from "./locales/es/home.json";
+import catHome from "./locales/cat/home.json";
+
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources: {
-      es: {
-        translation: esCommon,
-      },
-      ca: {
-        translation: catCommon,
-      },
-    },
+ resources: {
+  es: {
+    common: esCommon,
+    home: esHome,
+  },
+  ca: {
+    common: catCommon,
+    home: catHome,
+  },
+},
+ns: ["common", "home"],
+defaultNS: "common",
+
     fallbackLng: "es",
     debug: false,
     interpolation: {

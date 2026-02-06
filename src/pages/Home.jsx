@@ -10,7 +10,10 @@ const heroPositions = [
 
 const heroImages = ["/images/felix.png", "/images/vincent.png"];
 export default function Home() {
-  const { t } = useTranslation();
+  const { t: tHome } = useTranslation("home");
+const { t: tCommon } = useTranslation("common");
+
+
   const [isAActive, setIsAActive] = useState(true);
   const [aIndex, setAIndex] = useState(0);
   const [bIndex, setBIndex] = useState(1);
@@ -60,9 +63,10 @@ useEffect(() => {
 
 
         <div className="hero-inner container">
-          <div>
-            <h1 className="hero-title">{t("home_hero_title")}</h1>
-          </div>
+         
+            <h1 className="hero-title">{tHome("hero_title")}</h1>
+
+          
           {/*<p className="muted">{t("home_hero_sub")}</p>
             <div className="hero-ctas">
               <Link to="/adopcion" className="btn large">
@@ -76,10 +80,37 @@ useEffect(() => {
           <div className="hero-illustration" aria-hidden></div>
         </div>
       </section>
-      <section className="container">
-        <h2>{t("adoption")}</h2>
-        <p className="muted">{t("adoption_intro")}</p>
-      </section>
+     <section className="container success-section">
+  <h2>{tHome("success_title")}</h2>
+  <p className="muted">{tHome("success_intro")}</p>
+
+  <div className="stories-grid">
+
+    <div className="story-card">
+      <div className="story-image">
+        <img src="/images/felix.png" alt="Félix" />
+        <span className="badge">{tHome("adopted_badge")}</span>
+      </div>
+      <p>{tHome("felix_excerpt")}</p>
+      <Link to="/historias/felix" className="btn">
+        {tHome("read_story")}
+      </Link>
+    </div>
+
+    <div className="story-card">
+      <div className="story-image">
+        <img src="/images/vincent.png" alt="Vincent" />
+        <span className="badge">{tHome("adopted_badge")}</span>
+      </div>
+      <p>{tHome("vincent_excerpt")}</p>
+      <Link to="/historias/vincent" className="btn">
+        {tHome("read_story")}
+      </Link>
+    </div>
+
+  </div>
+</section>
+
     </main>
   );
 }

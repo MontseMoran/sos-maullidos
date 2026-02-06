@@ -4,23 +4,14 @@
   z-index: 100;
 
   /* fondo sólido arriba */
-  background: #fff;
-
+  background: rgba(255,255,255,0.85); 
+ backdrop-filter: blur(12px);         /* 👈 glass suave */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   /* importante: deja “cola” para el degradado */
-  padding-bottom: 18px;
+  
 }
 
-/* la “cola” degradada */
-.nav::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -60px;     /* baja un poco sobre la foto */
-  height: 60px;
-  background: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0));
-  pointer-events: none;
-}
+
 
 
 
@@ -32,8 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-    margin-top: -80px;
-  padding-top: 120px;
+   
 }
 
 .nav-left {
