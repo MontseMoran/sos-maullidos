@@ -8,7 +8,7 @@ const heroPositions = [
   "center 15%", // Vincent (naranja)
 ];
 
-const heroImages = ["/images/felix.png", "/images/vincent.png"];
+const heroImages = ["images/felix.png", "images/vincent.png"];
 export default function Home() {
   const { t: tHome } = useTranslation("home");
 const { t: tCommon } = useTranslation("common");
