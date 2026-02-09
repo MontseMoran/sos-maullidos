@@ -7,5 +7,12 @@
   "vincent_excerpt": "Necessitava alguna cosa més que cures mèdiques. Necessitava paciència. Avui ja no viu amb por. Viu en família.",
 
   "adopted_badge": "Adoptat 💛",
-  "read_story": "Llegir la seva història"
+  "read_story": "Llegir la seva història",
+  "help_title": "Com pots ajudar?",
+"help_adopt_title": "Adoptar",
+"help_adopt_desc": "Dóna una nova oportunitat.",
+"help_donate_title": "Donar",
+"help_donate_desc": "Ajuda’ns a continuar rescatant.",
+"help_volunteer_title": "Voluntariat",
+"help_volunteer_desc": "Sigues part del canvi."
 }

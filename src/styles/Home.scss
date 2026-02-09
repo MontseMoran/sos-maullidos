@@ -5,6 +5,7 @@
   padding-top: 72px;
   background: #fff;
 }
+
 .hero::after {
   content: "";
   position: absolute;
@@ -21,6 +22,7 @@
   pointer-events: none;
   z-index: 1;
 }
+
 .hero::before {
   content: "";
   position: absolute;
@@ -37,17 +39,14 @@
   z-index: 1;
 }
 
-
-
 .hero-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   z-index: 0;
   background-repeat: no-repeat;
-
   opacity: 0;
-  transition: opacity 1.6s ease-in-out; 
+  transition: opacity 1.6s ease-in-out;
 }
 
 .hero-bg.is-active {
@@ -61,11 +60,12 @@
   display: flex;
   align-items: flex-end;
   padding-bottom: 32px;
-   justify-content: center; 
-   text-align: center;
+  justify-content: center;
+  text-align: center;
 }
+
 .hero-title {
-    font-family: "Caveat", cursive;
+  font-family: "Caveat", cursive;
   font-weight: 500;
   font-size: clamp(2rem, 7vw, 3rem);
   line-height: 1.2;
@@ -77,8 +77,195 @@
 .story-image img {
   height: 260px;
 }
+
 .story-card {
   max-width: 420px;
   margin: 0 auto;
 }
 
+/* --- Com ajudar (iconos) --- */
+.help-section {
+  padding: 32px 0; /* base mobile */
+}
+
+.help-title {
+  text-align: center;
+  margin: 0 0 16px; /* base mobile */
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* móvil: vertical */
+  gap: 18px;
+}
+
+.help-card {
+  text-decoration: none;
+  text-align: center;
+  color: inherit;
+  position: relative;
+
+  border: 0;
+  background: transparent;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px; /* texto más pegado */
+}
+
+/* Reserva de altura para alinear textos (y que no “baile”) */
+.help-icon-wrapper {
+  height: 200px;              /* base mobile */
+  display: flex;
+  align-items: flex-end;       /* clave: icono apoyado abajo */
+  justify-content: center;
+}
+
+.help-icon {
+  width: 190px;                /* base mobile */
+  height: 190px;
+  object-fit: contain;
+  transition: transform 0.15s ease;
+}
+
+.help-icon--adopt {
+  width: 170px;                /* base mobile */
+  height: 170px;
+}
+
+/* ✅ para que NO salgan azules */
+.help-card h3,
+.help-card p {
+  color: #1c1212;
+}
+
+.help-card h3 {
+  margin: 0;
+  font-size: 1.15rem;          /* base mobile */
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.help-card p {
+  margin: 0;
+  font-size: 1.02rem;          /* base mobile */
+  line-height: 1.35;
+  color: rgba(47, 47, 47, 0.78);
+}
+
+.help-card:hover .help-icon {
+  transform: scale(1.08);
+}
+
+/* ===== TABLET (>=600px) ===== */
+@media (min-width: 600px) {
+  .help-section {
+    padding: 40px 0;
+  }
+
+  .help-title {
+    margin: 0 0 18px;
+  }
+
+  .help-grid {
+    grid-template-columns: repeat(3, 1fr); /* si no cabe en tablet, lo bajamos a 2 */
+    gap: 20px;
+  }
+
+  .help-icon-wrapper {
+    height: 240px;
+  }
+
+  .help-icon {
+    width: 220px;
+    height: 220px;
+  }
+
+  .help-icon--adopt {
+    width: 200px;
+    height: 200px;
+  }
+
+  .help-card h3 {
+    font-size: 1.18rem;
+  }
+
+  .help-card p {
+    font-size: 1.03rem;
+  }
+}
+
+/* ===== DESKTOP (>=900px) ===== */
+@media (min-width: 900px) {
+  .help-icon-wrapper {
+    height: 300px;
+  }
+
+  .help-icon {
+    width: 300px;
+    height: 300px;
+  }
+
+  .help-icon--adopt {
+    width: 270px;
+    height: 270px;
+  }
+
+  .help-card h3 {
+    font-size: 1.28rem;
+  }
+
+  .help-card p {
+    font-size: 1.08rem;
+  }
+}
+
+/* ===== PANTALLAS GRANDES (>=1440px) ===== */
+@media (min-width: 1440px) {
+  .help-icon-wrapper {
+    height: 340px;
+  }
+
+  .help-icon {
+    width: 340px;
+    height: 340px;
+  }
+
+  .help-icon--adopt {
+    width: 310px;
+    height: 310px;
+  }
+
+  .help-card h3 {
+    font-size: 1.35rem;
+  }
+
+  .help-card p {
+    font-size: 1.12rem;
+  }
+}
+
+/* ===== MUY GRANDES (>=1920px) ===== */
+@media (min-width: 1920px) {
+  .help-icon-wrapper {
+    height: 380px;
+  }
+
+  .help-icon {
+    width: 380px;
+    height: 380px;
+  }
+
+  .help-icon--adopt {
+    width: 350px;
+    height: 350px;
+  }
+    .help-grid {
+    gap: 80px;
+  }
+   .help-section .container {
+    max-width: 1600px;
+  }
+}

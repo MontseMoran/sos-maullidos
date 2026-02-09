@@ -1,11 +1,19 @@
 {
   "hero_title": "Juntos, cambiamos su historia.",
-  "success_title": "Ellos lo lograron",
+  "success_title": "Ellos lo consiguieron",
   "success_intro": "Félix y Vincent llegaron con heridas, miedo y un pasado difícil. Hoy tienen un hogar. Porque alguien decidió no rendirse.",
 
-  "felix_excerpt": "Llegó desconfiado, con el cuerpo marcado por lo que había vivido. La recuperación fue lenta. Hoy duerme tranquilo en un hogar donde lo esperan cada día.",
+  "felix_excerpt": "Llegó desconfiado, con el cuerpo marcado por lo que había vivido. La recuperación fue lenta. Hoy duerme tranquilo en un hogar donde le esperan cada día.",
   "vincent_excerpt": "Necesitaba algo más que cuidados médicos. Necesitaba paciencia. Hoy ya no vive con miedo. Vive en familia.",
 
   "adopted_badge": "Adoptado 💛",
-  "read_story": "Leer su historia"
+  "read_story": "Leer su historia",
+  "help_title": "¿Cómo puedes ayudar?",
+  "help_adopt_title": "Adoptar",
+  "help_adopt_desc": "Dale una nueva oportunidad.",
+  "help_donate_title": "Donar",
+  "help_donate_desc": "Ayúdanos a seguir rescatando.",
+  "help_volunteer_title": "Voluntariado",
+  "help_volunteer_desc": "Sé parte del cambio."
+
 }
