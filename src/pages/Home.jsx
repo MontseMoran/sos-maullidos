@@ -4,12 +4,33 @@ import { Link } from "react-router-dom";
 import "../styles/Home.scss";
 import { useEffect, useState } from "react";
 const heroPositions = [
-  "center 35%", // Félix (blanco y negro)
-  "center 15%",// Vincent (naranja)
-  "center 25%" //bob
+  { 
+    base: "62% 22%",
+    tablet: "48% 30%", 
+    desktop: "50% 28%" 
+  }, // Félix
+
+  { 
+    base: "72% 12%", 
+    tablet: "55% 18%", 
+    desktop: "50% 15%" 
+  }, // Vincent
+
+  { 
+    base: "62% 22%",
+    tablet: "50% 22%", 
+    desktop: "50% 20%" 
+  }, // Bob
+  
+  { 
+    base: "42% 42%",
+    tablet: "50% 22%", 
+    desktop: "50% 20%" 
+  }, // Tona
 ];
 
-const heroImages = ["images/felix.png", "images/vincent.png", "images/bob.png"];
+
+const heroImages = ["images/felix.png", "images/vincent.png", "images/bob.png", "images/tona.png"];
 export default function Home() {
   const { t: tHome } = useTranslation("home");
   const { t: tCommon } = useTranslation("common");
@@ -18,7 +39,7 @@ export default function Home() {
   const [isAActive, setIsAActive] = useState(true);
   const [aIndex, setAIndex] = useState(0);
   const [bIndex, setBIndex] = useState(1);
-
+  const [bp, setBp] = useState("base");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,13 +64,26 @@ export default function Home() {
   }, [isAActive, aIndex, bIndex]);
 
 
+  useEffect(() => {
+    const onResize = () => {
+      const w = window.innerWidth;
+      if (w >= 900) setBp("desktop");
+      else if (w >= 600) setBp("tablet");
+      else setBp("base");
+    };
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+
   return (
     <main>
       <section className="hero">
         <div className={`hero-bg ${isAActive ? "is-active" : ""}`}
           style={{
             backgroundImage: `url(${heroImages[aIndex]})`,
-            backgroundPosition: heroPositions[aIndex],
+            backgroundPosition: heroPositions[aIndex][bp],
           }}
 
         />
@@ -57,7 +91,7 @@ export default function Home() {
         <div className={`hero-bg ${!isAActive ? "is-active" : ""}`}
           style={{
             backgroundImage: `url(${heroImages[bIndex]})`,
-            backgroundPosition: heroPositions[bIndex],
+            backgroundPosition: heroPositions[bIndex][bp],
           }}
         />
 
@@ -73,7 +107,7 @@ export default function Home() {
 
           <div className="help-grid">
             <Link to="/adopcion" className="help-card">
-              <div class="help-icon-wrapper">
+              <div className="help-icon-wrapper">
                 <img className="help-icon help-icon--adopt" src="images/adoptar.png" alt="" aria-hidden="true" />
               </div>
               <h3>{tHome("help_adopt_title")}</h3>
@@ -81,7 +115,7 @@ export default function Home() {
             </Link>
 
             <Link to="/donar" className="help-card">
-              <div class="help-icon-wrapper">
+              <div className="help-icon-wrapper">
                 <img className="help-icon" src="images/donar.png" alt="" aria-hidden="true" />
               </div>
               <h3>{tHome("help_donate_title")}</h3>
@@ -89,7 +123,7 @@ export default function Home() {
             </Link>
 
             <Link to="/voluntariat" className="help-card">
-              <div class="help-icon-wrapper">
+              <div className="help-icon-wrapper">
                 <img className="help-icon" src="images/colaborar.png" alt="" aria-hidden="true" />
               </div>
               <h3>{tHome("help_volunteer_title")}</h3>
@@ -126,7 +160,16 @@ export default function Home() {
               {tHome("read_story")}
             </Link>
           </div>
-
+ <div className="story-card">
+            <div className="story-image">
+              <img src="images/bob.png" alt="Félix" />
+              <span className="badge">{tHome("adopted_badge")}</span>
+            </div>
+            <p>{tHome("felix_excerpt")}</p>
+            <Link to="/historias/bob" className="btn">
+              {tHome("read_story")}
+            </Link>
+          </div>
         </div>
       </section>
 

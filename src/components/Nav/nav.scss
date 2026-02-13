@@ -1,7 +1,7 @@
 .nav {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1002;
 
   /* fondo sólido arriba */
   background: rgba(255,255,255,0.85); 
@@ -11,10 +11,6 @@
   
 }
 
-
-
-
-
 .nav-inner {
   max-width: 1120px;
   margin: 0 auto;
@@ -23,7 +19,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-   
 }
 
 .nav-left {
@@ -96,26 +91,39 @@
 
 .links {
   position: fixed;
-  top: 0;
-  right: -360px;
-  width: 320px;
-  height: 100%;
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(18px);
-  border-left: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: -22px 0 44px rgba(0, 0, 0, 0.14);
-  transition: right 0.28s ease;
-  z-index: 60;
+  top: 72px;              /* altura nav */
+  left: 12px;
+  width: min(320px, calc(100vw - 24px));
+  max-height: calc(100vh - 84px);
+  overflow: auto;
+
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.16);
+
+  /* cerrado */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-16px);
+
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  z-index: 1001;
 }
 
 .links.open {
-  right: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
 }
+
+
 
 .links-inner {
   display: flex;
   flex-direction: column;
+  padding: 18px 16px 22px;
   gap: 10px;
 }
 
@@ -125,13 +133,18 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 10px 10px;
+  font-size: 17px;
+  padding: 12px 12px;          /* ✅ antes 12px 8px */
   text-decoration: none;
   font-weight: 620;
   color: rgba(0, 0, 0, 0.78);
-  border-radius: 12px;
+  border-radius: 14px;         /* ✅ un poco más “soft” */
   transition: background 0.16s ease, color 0.16s ease;
+
+  width: 100%;                 /* ✅ para que parezca lista */
+  justify-content: flex-start;
 }
+
 
 .nav-item:hover {
   background: rgba(0, 0, 0, 0.04);
@@ -151,6 +164,7 @@
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.18s ease;
+  display: none;
 }
 
 .nav-item.is-active::after {
@@ -177,6 +191,8 @@
   gap: 10px;
   transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease,
     border-color 0.18s ease;
+    font-size: 17px;
+padding: 12px 16px;
 }
 
 .drop-btn:hover {
@@ -223,17 +239,18 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.38);
+  background: rgba(10,10,10,0.22);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
-  z-index: 50;
+  z-index: 1000;
 }
 
 .overlay.show {
   opacity: 1;
   pointer-events: auto;
 }
+
 
 /* ============ DESKTOP ============ */
 
@@ -242,35 +259,59 @@
 }
 
 @media (min-width: 900px) {
-  .nav-left {
-    flex: 1;
-  }
+  /* layout: logo izquierda, menú centrado, idioma derecha */
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 18px;
+    min-height: 72px;
 
-  .links {
-    margin-left: auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
   }
 
   .hamburger {
-    display: block;
+    display: none;
   }
 
-  .links {
+  /* el contenedor del menú deja de ser “drawer” */
+    .links {
     position: static;
     width: auto;
-    height: auto;
-    padding: 0;
+    max-height: none;
+    overflow: visible;
+
     background: transparent;
-    box-shadow: none;
     backdrop-filter: none;
-    border-left: 0;
-    right: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
     transition: none;
+
+    padding-left: 28px;
+    margin: 0;
+    justify-self: center;
+    z-index: auto;
   }
 
   .links-inner {
     flex-direction: row;
     align-items: center;
-    gap: 12px;
+    gap: 20px;
+    padding: 0;            /* quita el padding del drawer */
+  }
+
+  .nav-left {
+    justify-self: start;
+  }
+
+  .nav-right {
+    justify-self: end;
   }
 
   .nav-item:hover::after {
@@ -302,5 +343,9 @@
 
   .lang-desktop {
     display: block;
+  }
+
+  .overlay {
+    display: none;
   }
 }
