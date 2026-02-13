@@ -3,12 +3,10 @@
   top: 0;
   z-index: 1002;
 
-  /* fondo sólido arriba */
-  background: rgba(255,255,255,0.85); 
- backdrop-filter: blur(12px);         /* 👈 glass suave */
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  /* importante: deja “cola” para el degradado */
-  
+  /* fondo solido arriba */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .nav-inner {
@@ -19,18 +17,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
 }
 
 .nav-right {
   display: flex;
   align-items: center;
   gap: 8px;
+  align-self: flex-start;
+}
+
+.nav-drawer {
+  flex-basis: 100%;
 }
 
 /* ============ BRAND ============ */
@@ -80,18 +87,19 @@
 .hamburger.is-open .bar:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
+
 .hamburger.is-open .bar:nth-child(2) {
   opacity: 0;
 }
+
 .hamburger.is-open .bar:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ============ MOBILE DRAWER ============ */
-
+/* ============ MOBILE MENU (legacy drawer, backup) ============
 .links {
   position: fixed;
-  top: 72px;              /* altura nav */
+  top: 72px;
   left: 12px;
   width: min(320px, calc(100vw - 24px));
   max-height: calc(100vh - 84px);
@@ -103,7 +111,6 @@
   border: 1px solid rgba(0,0,0,0.06);
   box-shadow: 0 18px 50px rgba(0,0,0,0.16);
 
-  /* cerrado */
   opacity: 0;
   pointer-events: none;
   transform: translateX(-16px);
@@ -120,48 +127,81 @@
   background: rgba(255,255,255,0.94);
   backdrop-filter: blur(14px);
 
-  width: 50%;          /* ⬅️ más estrecho */
-  max-width: 280px;    /* ⬅️ límite elegante */
-  margin: 0 auto;      /* ⬅️ centrado */
+  width: 150px;
+  max-width: 280px;
+  margin: 0 auto;
 
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.18);
 }
+*/
 
+/* ============ MOBILE MENU (push-down) ============ */
 
+.links {
+  position: static;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+
+  opacity: 0;
+  pointer-events: auto;
+  transform: translateY(-8px);
+
+  margin-top: 0;
+
+  background: transparent;
+  backdrop-filter: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+
+  transition: max-height 0.34s ease, opacity 0.24s ease, transform 0.24s ease,
+    margin-top 0.24s ease;
+  z-index: auto;
+}
+
+.links.open {
+  max-height: 700px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 8px;
+}
 
 .links-inner {
   display: flex;
   flex-direction: column;
   padding: 18px 16px 22px;
   gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
 }
 
-/* ============ MENU ITEMS (elegantes) ============ */
+/* ============ MENU ITEMS ============ */
 
 .nav-item {
   position: relative;
   display: inline-flex;
   align-items: center;
   font-size: 17px;
-  padding: 12px 12px;          /* ✅ antes 12px 8px */
+  padding: 12px 12px;
   text-decoration: none;
   font-weight: 620;
   color: rgba(0, 0, 0, 0.78);
-  border-radius: 14px;         /* ✅ un poco más “soft” */
+  border-radius: 14px;
   transition: background 0.16s ease, color 0.16s ease;
 
-  width: 100%;                 /* ✅ para que parezca lista */
-  justify-content: flex-start;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
 }
-
 
 .nav-item:hover {
   background: rgba(0, 0, 0, 0.04);
   color: rgba(0, 0, 0, 0.92);
 }
 
-/* subrayado fino activo */
 .nav-item::after {
   content: "";
   position: absolute;
@@ -181,18 +221,18 @@
   transform: scaleX(1);
 }
 
-/* ============ CTA + DROPDOWN “glass” ============ */
+/* ============ CTA + DROPDOWN ============ */
 
 .dropdown {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .drop-btn {
-  border: 1px solid rgba(0, 0, 0, 0.10);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(0, 0, 0, 0.03);
   color: rgba(0, 0, 0, 0.86);
-  padding: 10px 14px;
   border-radius: 999px;
   font-weight: 700;
   cursor: pointer;
@@ -201,14 +241,17 @@
   gap: 10px;
   transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease,
     border-color 0.18s ease;
-    font-size: 17px;
-padding: 12px 16px;
+  font-size: 17px;
+  padding: 12px 16px;
+  width: 100%;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .drop-btn:hover {
   background: rgba(0, 0, 0, 0.06);
   border-color: rgba(0, 0, 0, 0.14);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
 }
 
@@ -244,8 +287,7 @@ padding: 12px 16px;
   background: rgba(0, 0, 0, 0.04);
 }
 
-/* ============ OVERLAY ============ */
-
+/* ============ OVERLAY ============
 .overlay {
   position: fixed;
   inset: 0;
@@ -260,16 +302,15 @@ padding: 12px 16px;
   opacity: 1;
   pointer-events: auto;
 }
+*/
 
-
-/* ============ DESKTOP ============ */
-
-.lang-desktop {
+.overlay {
   display: none;
 }
 
+/* ============ DESKTOP ============ */
+
 @media (min-width: 900px) {
-  /* layout: logo izquierda, menú centrado, idioma derecha */
   .nav-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -281,12 +322,27 @@ padding: 12px 16px;
     align-items: center;
   }
 
+  .nav-item::after {
+    display: block;
+  }
+
+  .nav-item.is-active::after {
+    transform: scaleX(1);
+  }
+
   .hamburger {
     display: none;
   }
 
-  /* el contenedor del menú deja de ser “drawer” */
-    .links {
+  .brand-logo {
+    transform: translateX(-18px);
+  }
+
+  .nav-drawer {
+    flex-basis: auto;
+  }
+
+  .links {
     position: static;
     width: auto;
     max-height: none;
@@ -312,16 +368,21 @@ padding: 12px 16px;
   .links-inner {
     flex-direction: row;
     align-items: center;
-    gap: 20px;
-    padding: 0;            /* quita el padding del drawer */
+    gap: 14px;
+    padding: 0;
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
 
   .nav-left {
     justify-self: start;
+    flex: initial;
+    min-width: auto;
   }
 
   .nav-right {
     justify-self: end;
+    align-self: center;
   }
 
   .nav-item:hover::after {
@@ -349,10 +410,6 @@ padding: 12px 16px;
   .dropdown:hover .drop-panel,
   .drop-panel.open {
     display: flex;
-  }
-
-  .lang-desktop {
-    display: block;
   }
 
   .overlay {
