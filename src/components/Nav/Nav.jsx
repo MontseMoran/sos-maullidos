@@ -49,7 +49,7 @@ export default function Nav() {
               className="brand-logo"
             />
           </Link>
-
+<div className="nav-drawer">
           <nav id="main-menu" className={`links ${open ? "open" : ""}`}>
             <div className="links-inner">
             <NavLink to="/" className={navClass} onClick={closeAll} end>
@@ -129,6 +129,7 @@ export default function Nav() {
 
             </div>
           </nav>
+          </div>
         </div>
 
         <div className="nav-right">
