@@ -4,31 +4,34 @@ import "./footer.scss";
 
 export default function Footer() {
   const { t } = useTranslation();
+  const { t: tHome } = useTranslation("home");
+
   return (
     <footer className="site-footer">
       <div className="inner">
         <div className="left">
           <div className="brand-small">{t("brand")}</div>
+
           <div className="contact-small">
-            {t("contact_email")}{" "}
-            <a href="mailto:contacto@sosmaullidos.org">
-              contacto@sosmaullidos.org
+            <a href="mailto:sos.maullidos@gmail.com">
+              sos.maullidos@gmail.com
             </a>
           </div>
+
           <div className="contact-small">
-            {t("contact_whatsapp")}{" "}
             <a
-              href="https://wa.me/34600000000"
+              href="https://wa.me/34644359005"
               target="_blank"
               rel="noopener noreferrer"
             >
-              +34 600 000 000
+              +34 644 359 605
             </a>
           </div>
         </div>
 
         <div className="socials">
-          <div className="social-label">{t("footer_redes")}</div>
+          <div className="social-label">{tHome("footer_redes")}</div>
+
           <div className="social-icons">
             <a
               href="https://www.instagram.com/sosmaullidos/"
@@ -36,6 +39,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               aria-label="Instagram"
             >
+              {/* Instagram */}
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z"
@@ -51,8 +55,9 @@ export default function Footer() {
                 />
               </svg>
             </a>
+
             <a
-              href="https://www.facebook.com/sosmaullidos?locale=es_ES"
+              href="https://www.facebook.com/sosmaullidos"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -64,6 +69,7 @@ export default function Footer() {
                 />
               </svg>
             </a>
+
             <a
               href="https://www.tiktok.com/@sos.maullidos"
               target="_blank"
@@ -79,6 +85,7 @@ export default function Footer() {
                 />
               </svg>
             </a>
+
             <a
               href="https://x.com/sos_maullidos"
               target="_blank"
@@ -96,15 +103,31 @@ export default function Footer() {
             </a>
           </div>
         </div>
-
-        <div className="right">
-          <div className="help-cta">
-            <a className="btn" href="/contacto">
-              {t("footer_help")}
-            </a>
-          </div>
-        </div>
       </div>
+
+      {/* ===== BLOQUE SUBVENCIONES ===== */}
+   <div className="footer-support">
+  <div className="footer-support-title">
+    {tHome("footer_support")}
+  </div>
+
+  <div className="footer-logos">
+    <div className="footer-logo footer-logo--light">
+      <img
+        src="images/gobierno.png"
+        alt="Gobierno de España - Ministerio de Derechos Sociales y Agenda 2030"
+      />
+    </div>
+
+    <div className="footer-logo footer-logo--dark">
+      <img
+        src="images/ayuntamiento.png"
+        alt="Ajuntament de Pallejà"
+      />
+    </div>
+  </div>
+</div>
+
     </footer>
   );
 }

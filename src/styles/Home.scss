@@ -59,9 +59,10 @@
   min-height: 70vh;
   display: flex;
   align-items: flex-end;
-  padding-bottom: 32px;
+  padding-bottom: 44px;
   justify-content: center;
   text-align: center;
+  padding-bottom: clamp(16px, 4vh, 56px);
 }
 
 .hero-title {
@@ -71,7 +72,10 @@
   line-height: 1.2;
   letter-spacing: 0.01em;
   color: #2f2f2f;
-  margin: 0;
+  margin: 0 0 clamp(26px, 1.2vh, 18px);
+   text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.28);
 }
 
 .story-image img {
@@ -163,9 +167,35 @@
   gap: 32px;
   margin-top: 24px;
 }
+.story-image img {
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.16);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.story-card .btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  background: rgba(0, 0, 0, 0.05);
+  color: #1c1212;
+
+  transition: all 0.2s ease;
+}
+
+.story-card .btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+}
+
 
 /* ===== TABLET (>=600px) ===== */
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-width: 899px) {
   .help-section {
     padding: 40px 0;
   }
@@ -200,10 +230,55 @@
   .help-card p {
     font-size: 1.03rem;
   }
+ .success-section {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+    .success-section p {
+    max-width: 520px;
+  }
+
+  .story-card {
+    display: grid;
+    grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+    gap: 12px 18px;
+    align-items: start;
+  }
+
+  .story-card .story-image {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
+    justify-self: start;
+    width: 100%;
+  }
+
+  .story-card .story-image img {
+    width: 100%;
+    min-height: 220px;
+    object-fit: cover;
+  }
+
+  .story-card p {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .story-card .btn {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+  }
 }
 
 /* ===== DESKTOP (>=900px) ===== */
 @media (min-width: 900px) {
+  .help-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
   .help-icon-wrapper {
     height: 300px;
   }
@@ -225,8 +300,16 @@
   .help-card p {
     font-size: 1.08rem;
   }
-   .stories-grid {
+  .stories-grid {
     grid-template-columns: repeat(3, 1fr);
+    max-width: none;
+    margin: 24px auto 0;
+  }
+
+  .container.success-section {
+    max-width: 1400px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 
@@ -253,6 +336,17 @@
   .help-card p {
     font-size: 1.12rem;
   }
+
+  .container.success-section {
+    max-width: 2000px;
+    padding-left: clamp(28px, 3vw, 56px);
+    padding-right: clamp(28px, 3vw, 56px);
+  }
+
+  .stories-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: none;
+  }
 }
 
 /* ===== MUY GRANDES (>=1920px) ===== */
@@ -277,7 +371,14 @@
     .help-grid {
     gap: 80px;
   }
-   .help-section .container {
-    max-width: 1600px;
+  .help-section .container {
+    max-width: 2000px;
+    gap: 32px;
+  }
+
+  .container.success-section {
+    max-width: 2200px;
+    padding-left: clamp(36px, 4vw, 84px);
+    padding-right: clamp(36px, 4vw, 84px);
   }
 }

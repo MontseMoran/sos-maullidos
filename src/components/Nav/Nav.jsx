@@ -61,11 +61,11 @@ export default function Nav() {
             </NavLink>
 
             <NavLink
-              to="/casos-dificiles"
+              to="/blog"
               className={navClass}
               onClick={closeAll}
             >
-              {t("cases")}
+              {t("blog")}
             </NavLink>
 
             <NavLink to="/noticias" className={navClass} onClick={closeAll}>

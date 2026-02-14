@@ -4,28 +4,28 @@ import { Link } from "react-router-dom";
 import "../styles/Home.scss";
 import { useEffect, useState } from "react";
 const heroPositions = [
-  { 
+  {
     base: "62% 22%",
-    tablet: "48% 30%", 
-    desktop: "50% 28%" 
+    tablet: "48% 30%",
+    desktop: "50% 28%"
   }, // Félix
 
-  { 
-    base: "72% 12%", 
-    tablet: "55% 18%", 
-    desktop: "50% 15%" 
+  {
+    base: "72% 12%",
+    tablet: "55% 18%",
+    desktop: "50% 15%"
   }, // Vincent
 
-  { 
+  {
     base: "62% 22%",
-    tablet: "50% 22%", 
-    desktop: "50% 20%" 
+    tablet: "50% 22%",
+    desktop: "50% 20%"
   }, // Bob
-  
-  { 
+
+  {
     base: "42% 42%",
-    tablet: "50% 22%", 
-    desktop: "50% 20%" 
+    tablet: "50% 22%",
+    desktop: "50% 20%"
   }, // Tona
 ];
 
@@ -144,6 +144,7 @@ export default function Home() {
               <img src="images/felix.png" alt="Félix" />
               <span className="badge">{tHome("adopted_badge")}</span>
             </div>
+            <h3 className="story-name">Félix</h3>
             <p>{tHome("felix_excerpt")}</p>
             <Link to="/historias/felix" className="btn">
               {tHome("read_story")}
@@ -155,18 +156,31 @@ export default function Home() {
               <img src="images/vincent.png" alt="Vincent" />
               <span className="badge">{tHome("adopted_badge")}</span>
             </div>
+            <h3 className="story-name">Vincent</h3>
             <p>{tHome("vincent_excerpt")}</p>
             <Link to="/historias/vincent" className="btn">
               {tHome("read_story")}
             </Link>
           </div>
- <div className="story-card">
+          <div className="story-card">
             <div className="story-image">
               <img src="images/bob.png" alt="Félix" />
               <span className="badge">{tHome("adopted_badge")}</span>
             </div>
-            <p>{tHome("felix_excerpt")}</p>
+            <h3 className="story-name">Bob</h3>
+            <p>{tHome("bob_excerpt")}</p>
             <Link to="/historias/bob" className="btn">
+              {tHome("read_story")}
+            </Link>
+          </div>
+           <div className="story-card">
+            <div className="story-image">
+              <img src="images/tona.png" alt="Tona" />
+              <span className="badge">{tHome("in_foster_badge")}</span>
+            </div>
+            <h3 className="story-name">Tona</h3>
+            <p>{tHome("tona_excerpt")}</p>
+            <Link to="/historias/tona" className="btn">
               {tHome("read_story")}
             </Link>
           </div>

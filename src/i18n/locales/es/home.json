@@ -1,12 +1,15 @@
 {
   "hero_title": "Juntos, cambiamos su historia.",
-  "success_title": "Ellos lo consiguieron",
-  "success_intro": "Félix, Vincent y Bob llegaron con heridas, miedo y un pasado difícil. Hoy tienen un hogar. Porque alguien decidió no rendirse.",
+  "success_title": "Historias que dejan huella",
+  "success_intro": "Aquí compartimos algunas de las historias que nos recuerdan por qué no perdemos la esperanza. Seguimos luchando cada día porque sabemos que, incluso cuando todo parece imposible, siempre hay una oportunidad.",
 
-  "felix_excerpt": "Llegó desconfiado, con el cuerpo marcado por lo que había vivido. La recuperación fue lenta. Hoy duerme tranquilo en un hogar donde le esperan cada día.",
-  "vincent_excerpt": "Necesitaba algo más que cuidados médicos. Necesitaba paciencia. Hoy ya no vive con miedo. Vive en familia.",
+  "felix_excerpt": "De gato feral atropellado y lleno de miedo a compañero inseparable: la paciencia le dio a Félix su segunda oportunidad.",
+  "vincent_excerpt": "De gato feral cojo y con un ojo menos a compañero querido: Vincent también encontró su segunda oportunidad.",
+  "bob_excerpt": "Después de una vida difícil y muchas incertidumbres, Bob, sordo y positivo a FeLV, por fin tuvo la suerte que merecía.",
+  "tona_excerpt":"Con visión limitada y muy prudente, Tona vive en acogida y necesita padrinos que la apoyen en su proceso.",
 
-  "adopted_badge": "Adoptado 💛",
+  "adopted_badge": "Adoptado ❤️",
+  "in_foster_badge": "En acogida 💛",
   "read_story": "Leer su historia",
   "help_title": "¿Cómo puedes ayudar?",
   "help_adopt_title": "Adoptar",
@@ -14,6 +17,8 @@
   "help_donate_title": "Donar",
   "help_donate_desc": "Ayúdanos a seguir rescatando.",
   "help_volunteer_title": "Voluntariado",
-  "help_volunteer_desc": "Sé parte del cambio."
+  "help_volunteer_desc": "Sé parte del cambio.",
+"footer_redes": "Síguenos",
+"footer_support": "Con el apoyo de"
 
 }

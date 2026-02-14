@@ -1,12 +1,15 @@
 {
   "hero_title": "Junts, canviem la seva història.",
-  "success_title": "Ells ho van aconseguir",
-  "success_intro": "En Fèlix, en Vincent i en Bob van arribar amb ferides, por i un passat difícil. Avui tenen una llar. Perquè algú va decidir no rendir-se.",
+  "success_title": "Històries que deixen petjada",
+  "success_intro": "Aquí compartim algunes de les històries que ens recorden per què no perdem l’esperança. Continuem lluitant cada dia perquè sabem que, fins i tot quan tot sembla impossible, sempre hi ha una oportunitat.",
 
-  "felix_excerpt": "Va arribar desconfiat, amb el cos marcat pel que havia viscut. La recuperació va ser lenta. Avui dorm tranquil en una llar on l’esperen cada dia.",
-  "vincent_excerpt": "Necessitava alguna cosa més que cures mèdiques. Necessitava paciència. Avui ja no viu amb por. Viu en família.",
+  "felix_excerpt": "De gat feral atropellat i ple de por a company inseparable: la paciència va donar a en Félix la seva segona oportunitat.",
+  "vincent_excerpt": "De gat feral coix i amb un ull menys a company estimat: el Vincent també va trobar la seva segona oportunitat.",
+  "bob_excerpt": "Després d’una vida difícil i plena d’incerteses, en Bob, sord i positiu a FeLV, per fi va tenir la sort que es mereixia.",
+  "tona_excerpt":"Amb visió limitada i molt prudent, la Tona viu protegida en acollida i busca padrins que l’ajudin en el seu camí.",
 
-  "adopted_badge": "Adoptat 💛",
+  "adopted_badge": "Adoptat ❤️",
+  "in_foster_badge": "En acollida 💛",
   "read_story": "Llegir la seva història",
   "help_title": "Com pots ajudar?",
 "help_adopt_title": "Adoptar",
@@ -14,5 +17,8 @@
 "help_donate_title": "Donar",
 "help_donate_desc": "Ajuda’ns a continuar rescatant.",
 "help_volunteer_title": "Voluntariat",
-"help_volunteer_desc": "Sigues part del canvi."
+"help_volunteer_desc": "Sigues part del canvi.",
+"footer_redes": "Segueix-nos",
+"footer_support": "Amb el suport de"
+
 }
