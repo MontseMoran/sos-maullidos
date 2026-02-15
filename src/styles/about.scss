@@ -1,0 +1,124 @@
+.about-claim {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 30px;
+  padding-left: 14px;
+  border-left: 3px solid var(--accent);
+  color: #333;
+  margin-top: 30px;
+}
+
+.about-claim::before {
+ 
+  font-size: 2rem;
+  opacity: 0.4;
+  margin-right: 4px;
+}
+
+
+.about-image {
+  width: 100%;
+  height: auto; 
+  max-height: 420px;      
+  object-fit: cover;      
+  object-position: center;
+  display: block;
+  border-radius: 14px;
+  margin: 18px 0 8px;
+  object-position: center 35%;
+}
+
+.about-caption {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.about-hero {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.about-hero h1 {
+  margin: 0 0 14px;
+}
+
+.about-intro {
+  margin: 0 0 18px;
+  max-width: 70ch; /* opcional pero queda MUY pro */
+}
+/* ====== BASE (mobile) ====== */
+/* (lo tuyo ya está bien) */
+
+
+/* ====== TABLET (>= 600px) ====== */
+@media (min-width: 600px) {
+  .about-hero {
+    max-width: 920px;
+  }
+
+  .about-image {
+    max-height: 460px;
+  }
+}
+
+
+/* ====== DESKTOP (>= 900px) ====== */
+@media (min-width: 900px) {
+  .about-hero {
+    max-width: 1040px;
+  }
+
+  .about-claim {
+    font-size: 1.45rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.2rem;
+    margin: 0 0 14px;
+  }
+
+  .about-intro {
+    font-size: 1.02rem;
+    line-height: 1.55;
+    max-width: 75ch;
+    margin: 0 0 18px;
+  }
+
+  .about-image {
+    max-height: 500px;
+  }
+}
+
+
+/* ====== PANTALLAS GRANDES (>= 1440px) ====== */
+@media (min-width: 1440px) {
+  .about-hero {
+    max-width: 1280px;
+  }
+
+  .about-claim {
+    font-size: 1.6rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .about-intro {
+    font-size: 1.08rem;
+    max-width: 80ch;
+  }
+
+  .about-image {
+    max-height: 560px;
+  }
+}
+@media (min-width: 2560px) {
+
+  .about-hero {
+    max-width: 2000px;   
+  }
+
+  .about-claim {
+    font-size: 1.8rem;
+  }
+}

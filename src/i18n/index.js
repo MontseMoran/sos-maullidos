@@ -6,6 +6,9 @@ import esCommon from "./locales/es/common.json";
 import catCommon from "./locales/cat/common.json";
 import esHome from "./locales/es/home.json";
 import catHome from "./locales/cat/home.json";
+import esAbout from "./locales/es/about.json";
+import catAbout from "./locales/cat/about.json";
+
 
 
 i18n
@@ -16,13 +19,15 @@ i18n
   es: {
     common: esCommon,
     home: esHome,
+    about: esAbout,
   },
   ca: {
     common: catCommon,
     home: catHome,
+    about: catAbout,
   },
 },
-ns: ["common", "home"],
+ns: ["common", "home", "about"],
 defaultNS: "common",
 
     fallbackLng: "es",

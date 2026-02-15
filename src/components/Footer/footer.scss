@@ -22,8 +22,8 @@
   background-image: url("images/huella.svg");
   background-repeat: repeat;
   background-size: 90px;  /* prueba entre 80–120px */
-  opacity: 0.04;
-
+  opacity: 0.018;
+  filter: blur(0.6px);
   pointer-events: none;
 }
 
