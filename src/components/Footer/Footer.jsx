@@ -116,6 +116,7 @@ export default function Footer() {
       <img
         src="images/gobierno.png"
         alt="Gobierno de España - Ministerio de Derechos Sociales y Agenda 2030"
+        className="gobierno"
       />
     </div>
 
@@ -123,6 +124,7 @@ export default function Footer() {
       <img
         src="images/ayuntamiento.png"
         alt="Ajuntament de Pallejà"
+        className="ayto"
       />
     </div>
   </div>
