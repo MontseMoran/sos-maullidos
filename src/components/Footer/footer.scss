@@ -21,8 +21,8 @@
   z-index: 0;
   background-image: url("images/huella.svg");
   background-repeat: repeat;
-  background-size: 90px;  /* prueba entre 80–120px */
-  opacity: 0.018;
+  background-size: 80px;  /* prueba entre 80–120px */
+  opacity: 0.03;
   filter: blur(0.6px);
   pointer-events: none;
 }
@@ -43,6 +43,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-top: 4rem;
 }
 
 .site-footer .brand-small {
@@ -81,12 +82,14 @@
   font-size: 0.9rem;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
+  margin-top: 4rem;
 }
 
 .social-icons {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  
 }
 
 .social-icons a {
@@ -114,19 +117,18 @@
 }
 .footer-support {
   margin-top: 40px;
-  padding-top: 28px;
- 
-
+  padding: 28px 18px 0;
   text-align: center;
 }
+.footer-support .footer-support-title{
+  margin-bottom: 2rem;
+}
 
-.footer-support-title {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.55);
-  margin-bottom: 22px;
+.footer-support .footer-support-title,
+.footer-support .footer-logos {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 720px;   
 }
 
 .footer-logos {
@@ -158,6 +160,7 @@
 
 .footer-logo--dark {
   background: #5d6d66;
+  
 }
 .gobierno {
   max-width: 250px;
@@ -165,10 +168,14 @@
 
 .ayto {
   max-width: 240px;
-  
 }
 
-
+@media (min-width: 600px) {
+  .footer-support .footer-support-title,
+  .footer-support .footer-logos {
+    max-width: 920px;
+  }
+}
 
 
 /* ===== DESKTOP ===== */
@@ -182,7 +189,10 @@
     align-items: center;
     justify-content: space-between;
   }
-
+  .footer-support .footer-support-title,
+  .footer-support .footer-logos {
+    max-width: 1200px;
+  }
   .socials {
     align-items: flex-end;
   }
@@ -194,4 +204,16 @@
   max-width: 340px;
   
 }
+}
+@media (min-width: 1440px) {
+  .footer-support .footer-support-title,
+  .footer-support .footer-logos {
+    max-width: 1400px; 
+}
+}
+@media (min-width: 2560px) {
+  .footer-support .footer-support-title,
+  .footer-support .footer-logos {
+    max-width: 1600px; 
+  }
 }

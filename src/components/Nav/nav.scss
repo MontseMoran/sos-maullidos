@@ -2,8 +2,6 @@
   position: sticky;
   top: 0;
   z-index: 1002;
-
-  /* fondo solido arriba */
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -338,6 +336,8 @@
 
   .brand-logo {
     transform: none;
+  width: 84px;
+  height: 84px;
   }
 
   .brand {
