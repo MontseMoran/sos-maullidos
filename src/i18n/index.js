@@ -8,8 +8,10 @@ import esHome from "./locales/es/home.json";
 import catHome from "./locales/cat/home.json";
 import esAbout from "./locales/es/about.json";
 import catAbout from "./locales/cat/about.json";
-
-
+import esContact from "./locales/es/contact.json";
+import catContact from "./locales/cat/contact.json";
+import esAdmin from "./locales/es/admin.json";
+import catAdmin from "./locales/cat/admin.json";
 
 i18n
   .use(LanguageDetector)
@@ -20,14 +22,18 @@ i18n
     common: esCommon,
     home: esHome,
     about: esAbout,
+    contact: esContact,
+    admin: esAdmin,
   },
   ca: {
     common: catCommon,
     home: catHome,
     about: catAbout,
+    contact: catContact,
+    admin: catAdmin,
   },
 },
-ns: ["common", "home", "about"],
+ns: ["common", "home", "about", "contact", "admin"],
 defaultNS: "common",
 
     fallbackLng: "es",

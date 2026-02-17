@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-
+  text-align: center;
   padding: 0 18px;
 }
 
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 
 .site-footer .brand-small {
@@ -76,6 +76,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  text-align: center;
 }
 
 .social-label {
@@ -83,15 +84,27 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
   margin-top: 4rem;
+  margin-bottom: 1rem;
 }
 
 .social-icons {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  justify-content: center; 
+}
+.social-icons img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+  border-radius: 14px;
   
 }
-
+.social-icons img.insta {
+  width: 36px;   
+  height: 36px;
+}
 .social-icons a {
   width: 38px;
   height: 38px;
@@ -145,6 +158,9 @@
   object-fit: contain;
   display: block;
 }
+.social-icons a {
+  overflow: hidden;
+}
   
 .footer-logo {
   padding: 14px 20px;
@@ -155,12 +171,13 @@
 
 }
 .footer-logo--light {
-  background: #ffffff;
+  background: #cfcece;
+  z-index: 1001;
 }
 
 .footer-logo--dark {
   background: #5d6d66;
-  
+  z-index: 1001;
 }
 .gobierno {
   max-width: 250px;

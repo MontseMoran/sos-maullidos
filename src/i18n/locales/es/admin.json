@@ -1,0 +1,9 @@
+{
+  "admin_login_title": "Acceso administración",
+  "admin_email": "Correo electrónico",
+  "admin_password": "Contraseña",
+  "admin_enter": "Entrar",
+  "admin_entering": "Entrando...",
+  "admin_note": "Acceso restringido al equipo de administración."
+
+}

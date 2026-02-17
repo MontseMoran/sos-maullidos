@@ -1,95 +1,54 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import "../styles/contact.scss";
+
 
 export default function Contact() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("contact");
+
   return (
-    <main className="container">
+    <main className="container contact-page">
+
       <h1>{t("contact_title")}</h1>
 
+      {/* CONTACTO DIRECTO */}
       <section className="card">
-        <h2>{t("help_title")}</h2>
+        <h2>{t("contact_subtitle")}</h2>
         <p className="muted">{t("contact_intro")}</p>
-        <div className="cta-grid">
-          <a
-            className="btn"
-            href="https://www.teaming.net/sosmaullidos"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("help_teaming")}
-          </a>
-          <a
-            className="btn"
-            href="https://www.amazon.es/hz/wishlist/ls/1EXW0OQXB7M6B?ref_=wl_share"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("help_amazon")}
-          </a>
-          <a
-            className="btn"
-            href="https://es.wallapop.com/user/sosmaullidosp-275011390"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("help_wallapop")}
-          </a>
-          <a
-            className="btn"
-            href="https://www.vinted.es/member/187388390-sosmaullidos"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("help_vinted")}
-          </a>
-        </div>
-      </section>
 
-      <section className="card" style={{ marginTop: 12 }}>
-        <h2>{t("contact_title")}</h2>
-        <p className="muted">{t("contact_intro")}</p>
         <p>
-          {t("contact_email")}{" "}
+          <strong>{t("contact_email_label")}</strong>{" "}
           <a href="mailto:contacto@sosmaullidos.org">
-            contacto@sosmaullidos.org
+            sosmaullidos@gmail.com
           </a>
         </p>
+
         <p>
-          {t("contact_whatsapp")}{" "}
+          <strong>{t("contact_whatsapp_label")}</strong>{" "}
           <a
-            href="https://wa.me/34600000000"
+            href="https://wa.me/34644359005"
             target="_blank"
             rel="noopener noreferrer"
           >
-            +34 600 000 000
+            +34 644 359 605
           </a>
         </p>
       </section>
 
-      <section className="card" style={{ marginTop: 12 }}>
-        <h3>{t("collaborations")}</h3>
-        <p className="muted">{t("collaborations_intro")}</p>
+      {/* SI ENCUENTRAS UN GATO */}
+      <section className="card" >
+        <h2>{t("rescue_title")}</h2>
+        <p className="muted">{t("rescue_intro")}</p>
+
         <ul className="secondary-list">
-          <li>
-            <a
-              href="https://www.gosigatalimentacio.org/ca/39-sos-maullidos"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Gos i Gat Alimentació
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.bodas.net/detalles-de-bodas/sos-maullidos--e158091"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Bodas.net — detalles solidarios
-            </a>
-          </li>
+          <li>{t("rescue_step_1")}</li>
+          <li>{t("rescue_step_2")}</li>
+          <li>{t("rescue_step_3")}</li>
         </ul>
+
+        <p className="muted">
+          {t("rescue_note")}
+        </p>
       </section>
     </main>
   );

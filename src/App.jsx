@@ -18,11 +18,14 @@ import Cats from "./pages/admin/Cats";
 import Posts from "./pages/admin/Posts";
 import CatForm from "./pages/admin/CatForm";
 import PostForm from "./pages/admin/PostForm";
+import ScrollToTop from "./components/ScrollToTop";
+
 
 export default function App() {
   return (
     <div className="app">
       <Nav />
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/adopcion" element={<Adoption />} />
