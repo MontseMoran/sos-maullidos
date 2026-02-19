@@ -1,0 +1,211 @@
+
+
+.adoption {
+    padding: 40px 0 80px;
+}
+
+.adoption__container {
+    width: 90%;
+    margin: 0 auto;
+    margin: 5%;
+    padding-right: 5%;
+   
+}
+
+.adoption__header {
+    margin-bottom: 32px;
+}
+
+.adoption__title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.adoption__intro {
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.adoption__grid {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 600px) {
+    .adoption__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .adoption__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 1440px) {
+    .adoption__grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+}
+@media (min-width: 1920px) {
+    .adoption__grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+}
+@media (min-width: 2560px) {
+    .adoption__grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+.cat-card {
+    background: rgba(243, 243, 235, 0.75);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.08),
+        0 10px 24px rgba(0, 0, 0, 0.05);
+    width: 100%;
+  max-width: 350px; 
+  height: 100%;
+}
+
+.cat-card:hover {
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.12),
+        0 14px 32px rgba(0, 0, 0, 0.08);
+}
+
+
+.cat-card__media {
+    padding: 26px;
+}
+
+
+
+.cat-card__imgWrap{
+  position: relative;
+  border-radius: 18px;
+  padding: 14px;
+
+  background: linear-gradient(135deg, #f4efe6 0%, #ece4d8 55%, #f7f2ea 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,0.06),
+    inset 0 10px 18px rgba(0,0,0,0.04),
+    0 18px 36px rgba(0,0,0,0.10);
+}
+
+.cat-card__imgWrap::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+
+  background:
+    radial-gradient(120% 120% at 20% 10%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(120% 120% at 80% 90%, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 60%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, rgba(255,255,255,0) 2px, rgba(255,255,255,0) 6px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.010) 0px, rgba(0,0,0,0.010) 1px, rgba(255,255,255,0) 2px, rgba(255,255,255,0) 7px);
+
+  opacity: 0.55;
+}
+.cat-card__imgFrame{
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.cat-card__imgBg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(18px);
+  transform: scale(1.15);
+  opacity: 0.55;
+}
+.cat-card__img{
+  position: absolute;
+  inset: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  object-fit: contain;
+  border-radius: 10px;
+}
+.cat-card__imgPlaceholder{
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.04);
+}
+.cat-card__body {
+    padding: 0 22px 22px;
+}
+
+.cat-card__name {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.cat-card__meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.cat-chip{
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 4px 10px;
+  background: rgba(0,0,0,0.035);
+  color: rgba(0,0,0,0.72);
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.06);
+  backdrop-filter: blur(4px);
+  line-height: 1;
+}
+.cat-card__meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.cat-card__desc {
+    line-height: 1.6;
+    margin: 0;
+}
+
+.cat-card__readmore {
+    display: inline-block;
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: auto;
+}
+.cat-card__desc.is-clamped{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+@media (min-width: 900px){
+  .cat-card__desc.is-clamped{
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+}
+

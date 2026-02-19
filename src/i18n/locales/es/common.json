@@ -9,8 +9,35 @@
   "cta_how_help": "Cómo ayudar",
   "open_menu": "Abrir menú",
   "close_menu": "Cerrar menú",
+
   "help_donate": "Donar",
-"help_shop": "Compras solidarias",
-"help_volunteer": "Voluntariado",
-"home_hero_title": "Juntos, cambiamos su historia."
+  "help_shop": "Compras solidarias",
+  "help_volunteer": "Voluntariado",
+
+  "home_hero_title": "Juntos, cambiamos su historia.",
+
+  "read_more": "Leer más",
+  "read_less": "Leer menos",
+
+  "adoption_intro": "Estos gatos buscan un hogar definitivo donde sentirse seguros y queridos. Todos han sido rescatados y están preparados para comenzar una nueva vida. Adoptar es un compromiso para toda la vida.",
+
+  "loading": "Cargando…",
+  "adoption_empty": "Ahora mismo no hay gatos publicados.",
+  "adoption_list_aria": "Listado de gatos en adopción",
+
+  "age_unknown": "Edad no disponible",
+  "age_years": "{{count}} año",
+  "age_years_other": "{{count}} años",
+  "age_months": "{{count}} mes",
+  "age_months_other": "{{count}} meses",
+
+  "sex_male": "Macho",
+  "sex_female": "Hembra",
+  "sex_unknown": "Sexo desconocido",
+
+  "sterilized_yes": "Esterilizado",
+  "sterilized_no": "Sin esterilizar",
+
+  "description_empty": "Sin descripción.",
+  "cat_image_alt": "Foto de {{name}}"
 }

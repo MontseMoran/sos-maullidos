@@ -7,9 +7,9 @@ import "./styles/global.scss";
 import "./i18n/index.js";
 
 createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+ 
     <HashRouter>
       <App />
     </HashRouter>
-  </React.StrictMode>
+ 
 );

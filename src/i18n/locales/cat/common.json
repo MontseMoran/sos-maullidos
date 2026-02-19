@@ -9,8 +9,35 @@
   "cta_how_help": "Com ajudar",
   "open_menu": "Obrir menú",
   "close_menu": "Tancar menú",
+
   "help_donate": "Donar",
-"help_shop": "Compres solidaries",
-"help_volunteer": "Voluntariat",
-"home_hero_title": "Junts, canviem la seva història."
+  "help_shop": "Compres solidàries",
+  "help_volunteer": "Voluntariat",
+
+  "home_hero_title": "Junts, canviem la seva història.",
+
+  "read_more": "Llegir més",
+  "read_less": "Llegir menys",
+
+  "adoption_intro": "Aquests gats busquen una llar definitiva on sentir-se segurs i estimats. Tots han estat rescatats i estan preparats per començar una nova vida. Adoptar és un compromís per a tota la vida.",
+
+  "loading": "Carregant…",
+  "adoption_empty": "Ara mateix no hi ha gats publicats.",
+  "adoption_list_aria": "Llistat de gats en adopció",
+
+  "age_unknown": "Edat no disponible",
+  "age_years": "{{count}} any",
+  "age_years_other": "{{count}} anys",
+  "age_months": "{{count}} mes",
+  "age_months_other": "{{count}} mesos",
+
+  "sex_male": "Mascle",
+  "sex_female": "Femella",
+  "sex_unknown": "Sexe desconegut",
+
+  "sterilized_yes": "Esterilitzat",
+  "sterilized_no": "Sense esterilitzar",
+
+  "description_empty": "Sense descripció.",
+  "cat_image_alt": "Foto de {{name}}"
 }
