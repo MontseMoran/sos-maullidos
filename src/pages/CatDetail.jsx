@@ -38,7 +38,12 @@ function getAgeLabel(birthDate, t) {
   const now = new Date();
   const { years, months } = diffYMD(b, now);
   if (years <= 0) return t("age_months", { count: Math.max(1, months) });
-  return t("age_years", { count: years });
+
+if (months === 0) return t("age_years", { count: years });
+
+const yearLabel = t("age_years", { count: years });
+const monthLabel = t("age_months", { count: months });
+return `${yearLabel} ${monthLabel}`;
 }
 
 function getSexLabel(sex, t) {

@@ -36,12 +36,21 @@ function getAgeLabel(birthDate, t) {
   const now = new Date();
   const { years, months } = diffYMD(b, now);
 
-  if (years <= 0) {
-    const m = Math.max(1, months); // 0 meses -> 1 mes (recién nacido)
-    return t("age_months", { count: m });
-  }
+if (years <= 0) {
+  const m = Math.max(1, months);
+  return t("age_months", { count: m });
+}
+if (months === 0) {
   return t("age_years", { count: years });
 }
+
+// 👇 aquí generas las partes correctamente
+const yearLabel = t("age_years", { count: years });
+const monthLabel = t("age_months", { count: months });
+
+return `${yearLabel} ${monthLabel}`;
+  }
+
 
 function getSexLabel(sex, t) {
   const key =
@@ -116,15 +125,14 @@ export default function Adoption() {
                     <div className="cat-card__imgWrap">
                       <div className="cat-card__imgFrame">
 
-                       {imgUrl ? (
-  <>
-    <img className="cat-card__imgBg" src={imgUrl} alt="" aria-hidden="true" />
-    <img className="cat-card__img" src={imgUrl} alt={cat.name} loading="lazy" />
-  </>
-) : (
-  <div className="cat-card__imgPlaceholder" />
-)}
-
+                        {imgUrl ? (
+                          <>
+                            <img className="cat-card__imgBg" src={imgUrl} alt="" aria-hidden="true" />
+                            <img className="cat-card__img" src={imgUrl} alt={cat.name} loading="lazy" />
+                          </>
+                        ) : (
+                          <div className="cat-card__imgPlaceholder" />
+                        )}
 
                       </div>
                     </div>
@@ -150,15 +158,10 @@ export default function Adoption() {
                       </p>
                     )}
 
-
-                    {desc && (
                       <Link className="cat-card__readmore" to={`/adopcion/${cat.id}`}>
                         {t("read_more")}
                       </Link>
-                    )}
-
-
-
+                
                   </div>
                 </article>
               );
