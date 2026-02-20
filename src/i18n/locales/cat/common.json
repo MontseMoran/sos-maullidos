@@ -39,5 +39,9 @@
   "sterilized_no": "Sense esterilitzar",
 
   "description_empty": "Sense descripció.",
-  "cat_image_alt": "Foto de {{name}}"
+  "cat_image_alt": "Foto de {{name}}",
+ "back": "Tornar",
+  "back_to_adoption": "Tornar a adopció",
+  "not_found_title": "No trobat",
+  "not_found_text": "Aquest gat no existeix o ja no està publicat."
 }

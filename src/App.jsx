@@ -19,6 +19,7 @@ import Cats from "./pages/admin/Cats";
 import Posts from "./pages/admin/Posts";
 import CatForm from "./pages/admin/CatForm";
 import PostForm from "./pages/admin/PostForm";
+import CatDetail from "./pages/CatDetail"
 
 function SiteLayout() {
   return (
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="/quienes-somos" element={<About />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/ajuda" element={<Ajuda />} />
+        <Route path="/adopcion/:id" element={<CatDetail />} />
       </Route>
     </Routes>
   );

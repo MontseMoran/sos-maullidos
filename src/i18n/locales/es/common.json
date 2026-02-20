@@ -39,5 +39,9 @@
   "sterilized_no": "Sin esterilizar",
 
   "description_empty": "Sin descripción.",
-  "cat_image_alt": "Foto de {{name}}"
+  "cat_image_alt": "Foto de {{name}}",
+    "back": "Volver",
+  "back_to_adoption": "Volver a adopción",
+  "not_found_title": "No encontrado",
+  "not_found_text": "Este gato no existe o ya no está publicado."
 }
