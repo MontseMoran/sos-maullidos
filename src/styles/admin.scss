@@ -1,6 +1,4 @@
-/* =========================
-   ADMIN AUTH (LOGIN)
-========================= */
+
 
 .admin-auth {
   min-height: 100vh;
@@ -91,9 +89,7 @@
   width: 100%;
 }
 
-/* =========================
-   ADMIN PANEL LAYOUT
-========================= */
+
 
 .admin-shell {
   min-height: 100vh;
@@ -240,6 +236,41 @@
   border-radius: 12px;
   background: #fff;
 }
+/* PostForm / Admin forms */
+.card {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.card label {
+  display: block;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.card input,
+.card select,
+.card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.85);
+}
+
+.card textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* checkbox label (no aplastar) */
+.card label > input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  padding: 0;
+}
 
 @media (min-width: 600px) {
   .admin-form__grid {
@@ -247,10 +278,6 @@
   }
 }
 
-
-/* =========================
-   BREAKPOINTS (tu orden)
-========================= */
 
 @media (min-width: 600px) {
   .admin-shell {

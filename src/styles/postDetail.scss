@@ -1,0 +1,28 @@
+.postDetail {
+  padding: 40px 20px 80px;
+}
+
+.postDetail__container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.postDetail__image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.postDetail__title {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.postDetail__content {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #444;
+  white-space: pre-line;
+}

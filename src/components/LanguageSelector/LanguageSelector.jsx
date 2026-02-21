@@ -7,10 +7,14 @@ export default function LanguageSelector() {
 
   const setLang = (lng) => {
     i18n.changeLanguage(lng);
+    localStorage.setItem("i18nextLng", lng);
     localStorage.setItem("locale", lng);
   };
 
-  const current = i18n.language?.startsWith("ca") ? "ca" : "es";
+  const current =
+    i18n.language?.startsWith("cat") || i18n.language?.startsWith("ca")
+      ? "cat"
+      : "es";
 
   return (
     <div className="lang-switch">
@@ -23,8 +27,8 @@ export default function LanguageSelector() {
       </button>
 
       <button
-        className={`lang-btn ${current === "ca" ? "active" : ""}`}
-        onClick={() => setLang("ca")}
+        className={`lang-btn ${current === "cat" ? "active" : ""}`}
+        onClick={() => setLang("cat")}
         aria-label="Català"
       >
         CAT

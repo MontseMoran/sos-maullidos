@@ -25,6 +25,13 @@ i18n
     contact: esContact,
     admin: esAdmin,
   },
+  cat: {
+    common: catCommon,
+    home: catHome,
+    about: catAbout,
+    contact: catContact,
+    admin: catAdmin,
+  },
   ca: {
     common: catCommon,
     home: catHome,

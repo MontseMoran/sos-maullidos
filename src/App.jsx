@@ -3,7 +3,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-
+import PostDetail from "./pages/PostDetail";
 import Ajuda from "./pages/Ajuda";
 import Home from "./pages/Home";
 import Adoption from "./pages/Adoption";
@@ -11,7 +11,7 @@ import Cases from "./pages/Cases";
 import News from "./pages/News";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
+import Blog from "./pages/Blog";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import Login from "./pages/admin/Login";
@@ -52,12 +52,16 @@ export default function App() {
       <Route element={<SiteLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/adopcion" element={<Adoption />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/casos-dificiles" element={<Cases />} />
         <Route path="/noticias" element={<News />} />
+        <Route path="/noticias/:id" element={<PostDetail />} />
+        <Route path="/blog/:id" element={<PostDetail />} />
         <Route path="/quienes-somos" element={<About />} />
         <Route path="/contacto" element={<Contact />} />
         <Route path="/ajuda" element={<Ajuda />} />
         <Route path="/adopcion/:id" element={<CatDetail />} />
+        
       </Route>
     </Routes>
   );
