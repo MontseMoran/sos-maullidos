@@ -39,11 +39,11 @@ function getAgeLabel(birthDate, t) {
   const { years, months } = diffYMD(b, now);
   if (years <= 0) return t("age_months", { count: Math.max(1, months) });
 
-if (months === 0) return t("age_years", { count: years });
+  if (months === 0) return t("age_years", { count: years });
 
-const yearLabel = t("age_years", { count: years });
-const monthLabel = t("age_months", { count: months });
-return `${yearLabel} ${monthLabel}`;
+  const yearLabel = t("age_years", { count: years });
+  const monthLabel = t("age_months", { count: months });
+  return `${yearLabel} ${monthLabel}`;
 }
 
 function getSexLabel(sex, t) {
@@ -58,7 +58,7 @@ function getSterilizedLabel(sterilized, t) {
 
 export default function CatDetail() {
   const { id } = useParams();
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const [cat, setCat] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -70,7 +70,7 @@ export default function CatDetail() {
 
       const { data, error } = await supabase
         .from("cats")
-        .select("id,name,birth_date,sex,description,status,sterilized,image_path,published")
+        .select("id,name,birth_date,sex,description_es,description_cat,status,sterilized,image_path,published")
         .eq("id", id)
         .eq("published", true)
         .maybeSingle();
@@ -110,7 +110,13 @@ export default function CatDetail() {
   }
 
   const imgUrl = getCatImageUrl(cat.image_path);
-  const desc = (cat.description || "").trim();
+  const isCat = i18n.language === "cat";
+
+const desc = (
+  isCat
+    ? (cat.description_cat || cat.description_es || "")
+    : (cat.description_es || cat.description_cat || "")
+).trim();
 
   return (
     <main className="cat-detail">
@@ -124,7 +130,10 @@ export default function CatDetail() {
             <div className="cat-detail__imgWrap">
               <div className="cat-detail__imgFrame">
                 {imgUrl ? (
-                  <img className="cat-detail__img" src={imgUrl} alt={cat.name} />
+                  <>
+                    <img className="cat-detail__imgBg" src={imgUrl} alt="" aria-hidden="true" />
+                    <img className="cat-detail__img" src={imgUrl} alt={cat.name} />
+                  </>
                 ) : (
                   <div className="cat-detail__imgPlaceholder" />
                 )}

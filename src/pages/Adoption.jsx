@@ -36,20 +36,20 @@ function getAgeLabel(birthDate, t) {
   const now = new Date();
   const { years, months } = diffYMD(b, now);
 
-if (years <= 0) {
-  const m = Math.max(1, months);
-  return t("age_months", { count: m });
-}
-if (months === 0) {
-  return t("age_years", { count: years });
-}
-
-// 👇 aquí generas las partes correctamente
-const yearLabel = t("age_years", { count: years });
-const monthLabel = t("age_months", { count: months });
-
-return `${yearLabel} ${monthLabel}`;
+  if (years <= 0) {
+    const m = Math.max(1, months);
+    return t("age_months", { count: m });
   }
+  if (months === 0) {
+    return t("age_years", { count: years });
+  }
+
+
+  const yearLabel = t("age_years", { count: years });
+  const monthLabel = t("age_months", { count: months });
+
+  return `${yearLabel} ${monthLabel}`;
+}
 
 
 function getSexLabel(sex, t) {
@@ -69,9 +69,11 @@ function getCatImageUrl(imagePath) {
 }
 
 export default function Adoption() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const [cats, setCats] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const isCat = i18n.language?.startsWith("cat");
 
   useEffect(() => {
     let mounted = true;
@@ -80,11 +82,9 @@ export default function Adoption() {
       setLoading(true);
       const { data, error } = await supabase
         .from("cats")
-        .select(
-          "id,name,birth_date,sex,description,status,sterilized,image_path,published,created_at"
-        )
+        .select("id,name,birth_date,sex,description_es,description_cat,status,sterilized,image_path,published")
         .eq("published", true)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: true });
 
       if (error) console.error(error);
       if (mounted) setCats(data || []);
@@ -115,7 +115,9 @@ export default function Adoption() {
         ) : (
           <section className="adoption__grid" aria-label={t("adoption_list_aria")}>
             {cats.map((cat) => {
-              const desc = (cat.description || "").trim();
+              const desc = (isCat ? cat.description_cat : cat.description_es) || cat.description_es || cat.description_cat || "";
+              const descTrim = desc.trim();
+
               const imgUrl = getCatImageUrl(cat.image_path);
 
               return (
@@ -158,10 +160,10 @@ export default function Adoption() {
                       </p>
                     )}
 
-                      <Link className="cat-card__readmore" to={`/adopcion/${cat.id}`}>
-                        {t("read_more")}
-                      </Link>
-                
+                    <Link className="cat-card__readmore" to={`/adopcion/${cat.id}`}>
+                      {t("read_more")}
+                    </Link>
+
                   </div>
                 </article>
               );

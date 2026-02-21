@@ -52,6 +52,8 @@
 
 .cat-detail__media {
   width: 100%;
+   max-width: 860px;   
+  margin: 0 auto;
 }
 
 .cat-detail__imgWrap {
@@ -82,24 +84,29 @@
   opacity: 0.55;
 }
 
-.cat-detail__imgFrame {
+.cat-detail__imgFrame{
   position: relative;
-  border-radius: 16px;
   overflow: hidden;
-
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
-
-  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  aspect-ratio: 16/10;  /* mismo rectángulo siempre */
 }
 
-
-.cat-detail__img {
+.cat-detail__imgBg{
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px;
+  filter: blur(18px);
+  transform: scale(1.15);
+  opacity: 0.55;
+}
+
+.cat-detail__img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* foto entera */
 }
 
 
