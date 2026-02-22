@@ -1,176 +1,92 @@
-
-
 .adoption {
-    padding: 40px 0 80px;
+  padding: 40px 0 80px;
 }
 
 .adoption__container {
-    width: 90%;
-    margin: 0 auto;
-    margin: 5%;
-    padding-right: 5%;
-   
-}
+  width: 90%;
+  margin: 0 auto;
+} 
+
+
 
 .adoption__header {
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .adoption__title {
-    font-size: 2rem;
-    margin-bottom: 10px;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
 .adoption__intro {
-    line-height: 1.6;
-    color: rgba(0, 0, 0, 0.65);
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .adoption__grid {
-    display: grid;
-    justify-items: center;
-    grid-template-columns: 1fr;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  justify-content: center;
 }
 
-@media (min-width: 600px) {
-    .adoption__grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
-@media (min-width: 900px) {
-    .adoption__grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-@media (min-width: 1440px) {
-    .adoption__grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-}
-@media (min-width: 1920px) {
-    .adoption__grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-}
-@media (min-width: 2560px) {
-    .adoption__grid {
-        grid-template-columns: repeat(6, 1fr);
-    }
-}
-.cat-card {
-    background: rgba(230, 226, 230, 0.75);
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.08),
-        0 10px 24px rgba(0, 0, 0, 0.05);
-    width: 100%;
-  max-width: 380px; 
-  height: 100%;
-   display: flex;
+.cat-card{
+  position: relative; 
+
+  background: rgba(245, 239, 231, 0.92);
+  border-radius: 22px;
+
+  box-shadow:
+    0 18px 40px rgba(25, 18, 10, 0.18),
+    0 4px 10px rgba(25, 18, 10, 0.10);
+
+  width: 100%;
+  
+  display: flex;
   flex-direction: column;
+  overflow: hidden;  
+}
+.cat-card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  pointer-events: none;
+
+  /* doble marco */
+  box-shadow:
+    inset 0 0 0 1px rgba(90, 70, 50, 0.28),   /* borde sepia */
+    inset 0 0 0 4px rgba(255,255,255,0.75),  /* marco claro */
+    inset 0 0 0 7px rgba(39, 38, 36, 0.35);  /* aro sepia */
 }
 
-.cat-card:hover {
-    box-shadow:
-        0 40px 80px rgba(0, 0, 0, 0.12),
-        0 14px 32px rgba(0, 0, 0, 0.08);
+.cat-card:hover{
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.60),
+    0 32px 70px rgba(25, 18, 10, 0.22),
+    0 12px 26px rgba(25, 18, 10, 0.14);
 }
-
 
 .cat-card__media {
-    padding: 26px;
+  padding: 12px 12px 0 12px; 
 }
 
-
-/*OPCIÓN 2 
-.cat-card__imgWrap{
-  position: relative;
-  border-radius: 20px;
-  padding: 12px;
-
-  background: linear-gradient(135deg, #f4efe6 0%, #ece4d8 55%, #f7f2ea 100%);
-  box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,0.06),
-    inset 0 10px 18px rgba(0,0,0,0.04),
-    0 18px 36px rgba(0,0,0,0.10);
-}
-
-.cat-card__imgWrap::before{
-  content: "";
-  position: absolute;
-  inset: 0;
+.cat-card__imgWrap {
   border-radius: 18px;
-  pointer-events: none;
-
-  background:
-    radial-gradient(120% 120% at 20% 10%, rgba(248, 248, 248, 0.55) 0%, rgba(255,255,255,0) 55%),
-    radial-gradient(120% 120% at 80% 90%, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 60%),
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, rgba(255,255,255,0) 2px, rgba(255,255,255,0) 6px),
-    repeating-linear-gradient(0deg, rgba(0,0,0,0.010) 0px, rgba(0,0,0,0.010) 1px, rgba(255,255,255,0) 2px, rgba(255,255,255,0) 7px);
-
-  opacity: 0.55;
-}*/
-/* OPCIÓN 2 — MARCO GLASS MODERNO */
-
-/*.cat-card__imgWrap{
-  position: relative;
-  border-radius: 20px;
-  padding: 10px;
-
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(0,0,0,0.06);
-
-  backdrop-filter: blur(10px);
-
-  box-shadow:
-    0 16px 40px rgba(0,0,0,0.10);
 }
-
-.cat-card__imgWrap::before{
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      120% 120% at 20% 0%,
-      rgba(255,255,255,0.45) 0%,
-      rgba(255,255,255,0) 55%
-    );
-
-  opacity: 0.35;
-}*/
-/*OPCIÓN 3*/
-/* 
-.cat-card__imgWrap{
-  position: relative;
-  border-radius: 20px;
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
-  border: none;
-}
-
-.cat-card__imgWrap::before{
-  content: none;
-}
-
 .cat-card__imgFrame{
   position: relative;
-  border-radius: 16px;
+  border-radius: 18px 18px 0 0; 
   overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background: rgba(0,0,0,0.02);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+  aspect-ratio: 4/4;
+  background: rgba(120, 95, 70, 0.10);
+   width: 100%;
+  height: auto;
+    object-fit: contain;
+  display: block;
 }
-
 
 
 .cat-card__imgBg{
@@ -178,238 +94,189 @@
   inset: 0;
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  filter: blur(16px) brightness(1.06);
-  transform: scale(1.06);
-  opacity: 0.18;
+
+
+  filter: blur(12px) saturate(1.15) brightness(1.1);
+
+  transform: scale(1.12);
+
+  opacity: 0.65;
 }
 
 .cat-card__img{
   position: absolute;
-  inset: 8px;
-  width: calc(100% - 16px);
-  height: calc(100% - 16px);
-  object-fit: contain;
-  border-radius: 14px;
-} */
-/*opcion4*/
-
-/* =====================================================
-   ESTILO HALO MODERNO — blur suave + foto entera (contain)
-   - Sin marco beige
-   - Sin textura
-   - Sin “marco dentro de marco”
-   ===================================================== */
-
-.cat-card__imgWrap{
-  position: relative;
-  border-radius: 18px;
-  padding: 0;
-  background: transparent;
-  border: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;     
+  object-position: center;   
+  border-radius: 18px 18px 0 0; 
   box-shadow: none;
+   object-position: bottom center;
 }
 
-.cat-card__imgWrap::before{
-  content: none;
-}
-
-.cat-card__imgFrame{
-  position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-
-  /* “halo” moderno */
-  //background: rgba(255,255,255,0.35);
-  box-shadow:0 10px 30px rgba(5, 5, 5, 0.1);
-   // border: 6px solid rgba(62, 57, 68, 0.85);
-background: rgba(245, 244, 246, 0.92);
-}
-
-/* Blur como AURA, no como “marco” */
-/* .cat-card__imgBg{
-  position: absolute;
-  inset: -18px;               
-  width: calc(100% + 36px);
-  height: calc(100% + 36px);
-  object-fit: cover;
-  filter: blur(22px) brightness(1.08);
-  opacity: 0.20;
-  transform: scale(1.10);
-} */
-/* =====================================================
-   BLUR CON COLOR VIVO — usa el color real de la foto
-   ===================================================== */
-
-/* .cat-card__imgBg{
-  position: absolute;
-  inset: -24px;
-  width: calc(100% + 48px);
-  height: calc(100% + 48px);
-  object-fit: cover;
-
-  
-  filter:
-    blur(28px)
-    saturate(1.8)
-    contrast(1.1)
-    brightness(1.05);
-
-  opacity: 0.55;
-  transform: scale(1.15);
-}
-*/
-/* OPCIÓN 5 — BLUR COLOR LIMPIO (EDITORIAL PRO) */
-
-.cat-card__imgBg{
-  position: absolute;
-  inset: -16px;
-  width: calc(100% + 32px);
-  height: calc(100% + 32px);
-  object-fit: cover;
-
-  filter:
-    blur(22px)
-    saturate(1.4)
-    brightness(1.08);
-
-  opacity: 0.38;
-  transform: scale(1.08);
-}
-.cat-card__img{
-  position: absolute;
-  inset: 12px;                
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
-  object-fit: contain;
-  border-radius: 14px;
-
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.14),
-    0 2px 8px rgba(0,0,0,0.08);
-}
-
-/* Placeholder coherente */
-.cat-card__imgPlaceholder{
+.cat-card__imgPlaceholder {
   position: absolute;
   inset: 0;
-  border-radius: 18px;
-  background: rgba(0,0,0,0.04);
+  background: rgba(120, 95, 70, 0.12);
 }
 
-.cat-card__imgPlaceholder{
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.04);
-}
+
 .cat-card__body {
-    padding: 0 22px 22px;
-      display: flex;
+   padding: 0 18px 18px;
+  background: rgba(245, 239, 231, 0.92); 
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+  display: flex;
   flex-direction: column;
   height: 100%;
 }
 
 .cat-card__name {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: rgba(35, 26, 16, 0.92);
 }
 
 
-.cat-chip{
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 4px 10px;
-  background: rgba(0,0,0,0.035);
-  color: rgba(0,0,0,0.72);
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.06);
-  backdrop-filter: blur(4px);
-  line-height: 1;
-   display: inline-flex;
-  white-space: nowrap;  
-  flex: 0 0 auto; 
-}
+
 .cat-card__meta {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
+
+.cat-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  background: rgba(210, 190, 165, 0.55);
+  color: rgba(55, 40, 25, 0.82);
+  border-radius: 999px;
+  border: 1px solid rgba(90, 70, 50, 0.16);
+}
+
 
 .cat-card__desc {
-    line-height: 1.6;
-    margin: 0;
-    margin: 0 0 14px 0; 
+  line-height: 1.6;
+  margin: 0 0 14px 0;
+  color: rgba(55, 40, 25, 0.75);
 }
 
-.cat-card__readmore{
-   margin-top: auto;
+.cat-card__desc--empty {
+  color: rgba(55, 40, 25, 0.55);
+}
+
+.cat-card__desc.is-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+
+  .cat-card__desc.is-clamped {
+
+    -webkit-line-clamp: 4;
+  }
+}
+
+.cat-card__readmore {
+  margin-top: auto;
   align-self: flex-start;
-  color: rgba(0,0,0,0.75);
   display: inline-flex;
   align-items: center;
   padding: 10px 16px 10px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.35);
-  border: 1px solid rgba(0,0,0,0.08);
-  backdrop-filter: blur(8px);
+  background: rgba(245, 239, 231, 0.75);
+  border: 1px solid rgba(90, 70, 50, 0.18);
+  box-shadow:
+    0 10px 18px rgba(25, 18, 10, 0.16),
+    inset 0 1px 0 rgba(255,255,255,0.6);
 
-  font-weight: 700;
+  font-weight: 800;
   text-decoration: none;
-
+  color: rgba(15, 13, 11, 0.85);
   transition: all .2s ease;
-  position: relative;
 }
 
-.cat-card__readmore:hover{
+.cat-card__readmore:hover {
+  background: rgba(17, 17, 17, 0.92);   /* sepia oscuro */
+  color: rgba(243, 243, 243, 0.95);     /* sepia claro */
+  border-color: rgba(55, 40, 25, 0.92);
+  box-shadow:
+    0 14px 24px rgba(25, 18, 10, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.15);
   transform: translateY(-2px);
-  background: rgba(255,255,255,0.5);
 }
 
-.cat-card__readmore:hover::after{
-  transform: translateX(4px);
-  opacity: 0.8;
-}
-.cat-card__readmore:visited{
-  color: rgba(0,0,0,0.75);
-}
-.cat-card__readmore::after{
+.cat-card__readmore::after {
   content: "";
   width: 16px;
   height: 16px;
   margin-left: 8px;
-
   background-image: url("/images/huella.svg");
   background-size: contain;
   background-repeat: no-repeat;
-
-  opacity: 0.5;
-  transition: transform .2s ease, opacity .2s ease;
-}
-.cat-card__readmore:active{
-  transform: translateY(-1px);
+  opacity: 0.6;
+  transition: transform .2s ease;
 }
 
-.cat-card__readmore:focus-visible{
-  outline: 2px solid rgba(0,0,0,0.35);
-  outline-offset: 2px;
+.cat-card__readmore:hover::after {
+filter: brightness(0) invert(1);
 }
-.cat-card__desc.is-clamped{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
+
+@media (min-width: 600px) {
+
+  .adoption__title {
+    font-size: 2.2rem;
+  }
+
+   .adoption__intro {
+    font-size: 1rem;
+  }
+
+  .cat-card__name {
+    font-size: 1.2rem;
+  }
+
+  .cat-card__desc {
+    font-size: 0.95rem;
+  }
+
 }
 
 
-@media (min-width: 900px){
-  .cat-card__desc.is-clamped{
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
+@media (min-width: 900px) {
+
+  .adoption__title {
+    font-size: 2.4rem;
+  }
+
+  .cat-card__name {
+    font-size: 1.25rem;
+  }
+
+  .cat-card__desc {
+    font-size: 1rem;
+  }
+    .adoption__intro {
+    font-size: 1.05rem;
+  }
+
+}
+
+@media (min-width: 1440px) {
+
+  .adoption__title {
+    font-size: 2.6rem;
+  }
+ .adoption__intro {
+    font-size: 1.1rem;
+ 
   }
 }
-

@@ -18,7 +18,7 @@ export default function Contact() {
 
         <p>
           <strong>{t("contact_email_label")}</strong>{" "}
-          <a href="mailto:contacto@sosmaullidos.org">
+          <a href="mailto:sos.maullidos@gmail.com">
             sos.maullidos@gmail.com
           </a>
         </p>

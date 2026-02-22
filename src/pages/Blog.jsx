@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import "../styles/news.scss"; // reutiliza el mismo layout/cards que News (si quieres)
 
 export default function Blog() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [posts, setPosts] = useState([]);
+  const isCat = i18n.language?.startsWith("cat");
 
   useEffect(() => {
     let mounted = true;
+
     (async () => {
       const { data } = await supabase
         .from("posts")
@@ -15,31 +19,53 @@ export default function Blog() {
         .eq("type", "blog")
         .eq("published", true)
         .order("created_at", { ascending: false });
+
       if (mounted) setPosts(data || []);
     })();
+
     return () => (mounted = false);
   }, []);
 
   return (
-    <main className="container">
-      <h1>{t("blog")}</h1>
-      <div className="grid">
-        {posts.map((p) => (
-          <article key={p.id} className="card">
-            <img
-              src={
-                p.image_path
-                  ? supabase.storage
-                      .from(import.meta.env.VITE_SUPABASE_BUCKET || "public")
-                      .getPublicUrl(p.image_path).publicUrl
-                  : ""
-              }
-              alt={p.title}
-            />
-            <h3>{p.title}</h3>
-            <p className="meta">{p.excerpt}</p>
-          </article>
-        ))}
+    <main className="news">
+      <div className="news__container">
+        <header className="news__header">
+          <h1 className="news__title">{t("blog")}</h1>
+        </header>
+
+        <section className="news__grid">
+          {posts.map((p) => {
+            const title =
+              (isCat ? p.title_cat : p.title_es) || p.title_es || p.title_cat || "";
+            const excerpt =
+              (isCat ? p.excerpt_cat : p.excerpt_es) || p.excerpt_es || p.excerpt_cat || "";
+
+            const imageUrl = p.image_path
+              ? supabase.storage.from("cats").getPublicUrl(p.image_path).data?.publicUrl
+              : "";
+
+            return (
+              <article key={p.id} className="news-card">
+                <div className="news-card__media">
+                  {imageUrl ? (
+                    <img className="news-card__img" src={imageUrl} alt={title} />
+                  ) : (
+                    <div className="news-card__imgPlaceholder" />
+                  )}
+                </div>
+
+                <div className="news-card__body">
+                  <h3 className="news-card__title">{title}</h3>
+                  <p className="news-card__excerpt">{excerpt}</p>
+
+                  <Link className="cat-card__readmore news-card__readmore" to={`/blog/${p.id}`}>
+                    {t("read_more")}
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
+        </section>
       </div>
     </main>
   );

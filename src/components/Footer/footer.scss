@@ -29,32 +29,33 @@
 
 
 .site-footer .inner {
-  /* mobile first */
+  padding: 28px 18px 12px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   text-align: center;
-  padding: 0 18px;
+  
 }
 
-/* ===== LEFT ===== */
+
 
 .site-footer .left {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 1rem;
+ 
 }
 
 .site-footer .brand-small {
+  font-size: 1.08rem;
   font-weight: 800;
-  font-size: 1rem;
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.9);
 }
 
 .site-footer .contact-small {
-  font-size: 0.92rem;
+  font-size: 0.98rem;
+  
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -80,11 +81,12 @@
 }
 
 .social-label {
-  font-size: 0.9rem;
+  
   font-weight: 700;
   color: rgba(0, 0, 0, 0.8);
   margin-top: 4rem;
   margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
 .social-icons {
@@ -94,20 +96,20 @@
   justify-content: center; 
 }
 .social-icons img {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   display: block;
   border-radius: 14px;
   
 }
 .social-icons img.insta {
-  width: 36px;   
-  height: 36px;
+  width: 38px;   
+  height: 38px;
 }
 .social-icons a {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: 14px;
 
   display: inline-flex;
@@ -129,12 +131,13 @@
   box-shadow: 0 14px 28px rgba(14, 20, 30, 0.12);
 }
 .footer-support {
-  margin-top: 40px;
-  padding: 28px 18px 0;
+  margin-top: 28px;
+  padding: 18px 18px 0;
   text-align: center;
 }
 .footer-support .footer-support-title{
   margin-bottom: 2rem;
+  font-size: 1rem;
 }
 
 .footer-support .footer-support-title,
@@ -203,8 +206,14 @@
     margin: 0 auto;
 
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
     justify-content: space-between;
+  }
+    .social-label {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    text-align: right;
   }
   .footer-support .footer-support-title,
   .footer-support .footer-logos {
@@ -212,6 +221,7 @@
   }
   .socials {
     align-items: flex-end;
+    text-align: right;
   }
   .gobierno {
   max-width: 550px;
@@ -221,12 +231,24 @@
   max-width: 340px;
   
 }
+  .site-footer .brand-small { font-size: 1.18rem; }
+  .site-footer .contact-small { font-size: 1.02rem; }
+  .social-label { font-size: 1.05rem; }
+  .footer-support .footer-support-title { font-size: 1.05rem; }
+
+  .social-icons img { width: 34px; height: 34px; }
+  .social-icons a { width: 44px; height: 44px; }
+  .social-icons img.insta { width: 40px; height: 40px; }
 }
 @media (min-width: 1440px) {
   .footer-support .footer-support-title,
   .footer-support .footer-logos {
     max-width: 1400px; 
 }
+.site-footer .brand-small { font-size: 1.24rem; }
+  .site-footer .contact-small { font-size: 1.06rem; }
+  .social-label { font-size: 1.1rem; }
+  .footer-support .footer-support-title { font-size: 1.1rem; }
 }
 @media (min-width: 2560px) {
   .footer-support .footer-support-title,
