@@ -271,7 +271,78 @@
   margin-right: 8px;
   padding: 0;
 }
+/* contenedor botones superiores */
+.admin-top-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
 
+/* base común: Link y button idénticos */
+.admin-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1;
+
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition: all 0.15s ease;
+}
+
+/* crear */
+.admin-action--primary {
+  background: #2f5d62;
+  color: white;
+}
+
+.admin-action--primary:hover {
+  background: #264b4f;
+}
+
+/* ver web */
+.admin-action--ghost {
+  background: transparent;
+  color: #2f5d62;
+  border-color: rgba(47, 93, 98, 0.25);
+}
+
+.admin-action--ghost:hover {
+  background: rgba(47, 93, 98, 0.06);
+}
+
+/* editar */
+.admin-action--edit {
+  background: transparent;
+  color: #2f5d62;
+  border-color: rgba(47, 93, 98, 0.25);
+}
+
+.admin-action--edit:hover {
+  background: rgba(47, 93, 98, 0.06);
+}
+
+/* eliminar */
+.admin-action--danger {
+  background: transparent;
+  color: #b42318;
+  border-color: rgba(180, 35, 24, 0.25);
+}
+
+.admin-action--danger:hover {
+  background: rgba(180, 35, 24, 0.06);
+}
 @media (min-width: 600px) {
   .admin-form__grid {
     grid-template-columns: 1fr 1fr;

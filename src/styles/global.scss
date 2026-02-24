@@ -120,9 +120,7 @@ button:hover {
   text-align: center;
 }
 
-/* =========================
-   ADMIN
-========================= */
+
 .admin {
   display: flex;
   gap: 16px;
@@ -136,12 +134,22 @@ button:hover {
   flex: 1;
 }
 
-/* =========================
-   FOOTER
-========================= */
-.site-footer {
-  padding: 16px 0;
-  margin-top: 28px;
+html, body {
+  height: 100%;
+}
+
+#root {
+  min-height: 100%;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app main {
+  flex: 1;
 }
 
 

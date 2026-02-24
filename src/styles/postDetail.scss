@@ -5,6 +5,7 @@
 .postDetail__container {
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 18px;
 }
 
 .postDetail__image {
@@ -25,4 +26,32 @@
   line-height: 1.7;
   color: #444;
   white-space: pre-line;
+}
+.postDetail__media{
+  margin-bottom: 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.04);
+}
+
+.postDetail__image{
+  width: 100%;
+  height: clamp(220px, 40vh, 460px);
+  object-fit: contain;
+  display: block;
+}
+@media (min-width: 900px){
+  .postDetail__container{
+    max-width: 900px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1440px){
+  .postDetail__container{
+    max-width: 1000px;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
 }

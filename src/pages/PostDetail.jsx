@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
 import "../styles/postDetail.scss";
+import BackLink from "../components/backLink/BackLink";
 
 export default function PostDetail() {
   const { id } = useParams();
+  const { pathname } = useLocation();
+const isBlogRoute = pathname.startsWith("/blog");
+const backUrl = isBlogRoute ? "/blog" : "/noticias";
+const allowedTypes = isBlogRoute ? ["blog"] : ["news", "event", "urgent"];
   const { i18n } = useTranslation();
 
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  const BUCKET = import.meta.env.VITE_SUPABASE_BUCKET || "cats";
 
   useEffect(() => {
     let mounted = true;
@@ -20,6 +26,7 @@ export default function PostDetail() {
         .select("*")
         .eq("id", id)
         .eq("published", true)
+        .in("type", allowedTypes)
         .single();
 
       if (mounted) {
@@ -49,13 +56,14 @@ export default function PostDetail() {
     "";
 
   const imageUrl = post.image_path
-    ? supabase.storage.from("cats").getPublicUrl(post.image_path).data?.publicUrl
-    : null;
+  ? supabase.storage.from(BUCKET).getPublicUrl(post.image_path).data?.publicUrl
+  : null;
+
 
   return (
     <main className="postDetail">
       <div className="postDetail__container">
-
+<BackLink to={backUrl} />
         {imageUrl && (
           <img
             className="postDetail__image"

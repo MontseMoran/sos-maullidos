@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../lib/supabaseClient";
 import "../styles/catDetail.scss";
+import BackLink from "../components/backLink/BackLink";
 
 function getCatImageUrl(imagePath) {
   if (!imagePath) return "";
@@ -121,9 +122,7 @@ const desc = (
   return (
     <main className="cat-detail">
       <div className="cat-detail__container">
-        <Link className="cat-detail__back" to="/adopcion">
-          ← {t("back")}
-        </Link>
+       <BackLink to="/adopcion" />
 
         <section className="cat-detail__grid">
           <div className="cat-detail__media">
