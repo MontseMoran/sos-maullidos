@@ -59,6 +59,14 @@ function getSterilizedLabel(sterilized, t) {
   return sterilized ? t("sterilized_yes") : t("sterilized_no");
 }
 
+function getStatusLabel(status, t) {
+  if (!status) return "";
+  const key = `status_${status}`;
+  const translated = t(key);
+  if (translated !== key) return translated;
+  return status.replaceAll("_", " ");
+}
+
 export default function CatDetail() {
   const { id } = useParams();
   const { t, i18n } = useTranslation("common");
@@ -66,15 +74,15 @@ export default function CatDetail() {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
-const adoptRef = useRef(null);
-useEffect(() => {
-  if (isOpen && adoptRef.current) {
-    adoptRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-}, [isOpen]);
+  const adoptRef = useRef(null);
+  useEffect(() => {
+    if (isOpen && adoptRef.current) {
+      adoptRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
+  }, [isOpen]);
   useEffect(() => {
     let mounted = true;
 
@@ -161,7 +169,7 @@ useEffect(() => {
               <span className="cat-chip">
                 {getSterilizedLabel(!!cat.sterilized, t)}
               </span>
-              {cat.status && <span className="cat-chip">{cat.status}</span>}
+              {cat.status && <span className="cat-chip">{getStatusLabel(cat.status, t)}</span>}
             </div>
 
             {desc ? (
@@ -172,21 +180,21 @@ useEffect(() => {
               </p>
 
             )}
-           <button
-  type="button"
-  className={`cat-detail__cta ${isOpen ? "is-open" : ""}`}
-  onClick={() => setIsOpen(v => !v)}
->
-  <span>
-    {isOpen
-      ? "Cerrar formulario"
-      : `¿Quieres adoptar a ${cat.name}?`}
-  </span>
+            <button
+              type="button"
+              className={`cat-detail__cta ${isOpen ? "is-open" : ""}`}
+              onClick={() => setIsOpen(v => !v)}
+            >
+              <span>
+                {isOpen
+                  ? t("adopt_cta_close")
+                  : t("adopt_cta_open", { name: cat.name })}
+              </span>
 
-  <span className="cat-detail__ctaIcon">
-    ▾
-  </span>
-</button>
+              <span className="cat-detail__ctaIcon">
+                ▾
+              </span>
+            </button>
 
             {isOpen && (
               <div className="cat-detail__adoptPanel" ref={adoptRef}>

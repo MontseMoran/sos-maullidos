@@ -45,5 +45,19 @@
   "not_found_title": "No encontrado",
   "not_found_text": "Este gato no existe o ya no está publicado.",
    "age_years_months": "{{years}} {{yearLabel}} {{months}} {{monthLabel}}",
-   "urgent": "urgente"
+   "status_en_adopcion": "En adopción",
+   "status_adoptado": "Adoptado",
+   "status_reservado": "Reservado",
+   "urgent": "urgente",
+     "support_donation_title": "Formulario de adopción",
+  "support_name": "Nombre",
+  "support_email": "Correo electrónico",
+  "support_phone": "Teléfono",
+  "support_message": "Mensaje",
+  "support_send": "Enviar solicitud",
+  "support_close": "Cerrar formulario",
+
+  "support_message_placeholder": "Cuéntanos un poco sobre ti y por qué quieres adoptar a este gato...",
+  "adopt_cta_open": "¿Quieres adoptar a {{name}}?",
+  "adopt_cta_close": "Cerrar formulario"
 }

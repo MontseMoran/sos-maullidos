@@ -45,6 +45,20 @@
   "not_found_title": "No trobat",
   "not_found_text": "Aquest gat no existeix o ja no està publicat.",
    "age_years_months": "{{years}} {{yearLabel}} {{months}} {{monthLabel}}",
-   "urgent": "urgent"
+   "status_en_adopcion": "En adopció",
+   "status_adoptado": "Adoptat",
+   "status_reservado": "Reservat",
+   "urgent": "urgent", 
+  "support_donation_title": "Formulari d’adopció",
+  "support_name": "Nom",
+  "support_email": "Correu electrònic",
+  "support_phone": "Telèfon",
+  "support_message": "Missatge",
+  "support_send": "Enviar sol·licitud",
+  "support_close": "Tancar formulari",
+
+  "support_message_placeholder": "Explica’ns una mica sobre tu i per què vols adoptar aquest gat...",
+  "adopt_cta_open": "Vols adoptar a {{name}}?",
+  "adopt_cta_close": "Tancar formulari"
   
 }

@@ -5,7 +5,7 @@ import "./supportForm.scss";
 
 
 export default function SupportForm({ mode = "donation", context = null }) {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("common");
 
   const isCatLang =
     i18n.language?.startsWith("cat") ||
