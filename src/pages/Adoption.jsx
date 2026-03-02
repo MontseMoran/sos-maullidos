@@ -106,6 +106,7 @@ export default function Adoption() {
         <header className="adoption__header">
           <h1 className="adoption__title">{t("adoption")}</h1>
           <p className="adoption__intro">{t("adoption_intro")}</p>
+          
         </header>
 
         {loading ? (

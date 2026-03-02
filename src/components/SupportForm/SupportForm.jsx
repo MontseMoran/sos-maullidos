@@ -4,7 +4,11 @@ import { useTranslation } from "react-i18next";
 import "./supportForm.scss";
 
 
-export default function SupportForm({ mode = "donation", context = null }) {
+export default function SupportForm({
+  mode = "donation",
+  context = null,
+  showAmount,
+}) {
   const { t, i18n } = useTranslation("common");
 
   const isCatLang =
@@ -30,6 +34,8 @@ export default function SupportForm({ mode = "donation", context = null }) {
     return t("support_donation_title");
   }, [mode, context, t]);
 
+  const shouldShowAmount =
+    showAmount ?? ["donation", "member", "sponsor"].includes(mode);
 
 
   const handleSubmit = async (e) => {
@@ -45,9 +51,7 @@ export default function SupportForm({ mode = "donation", context = null }) {
         name: name.trim(),
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
-        amount: ["donation", "member", "sponsor"].includes(mode)
-          ? Number(amount || 0)
-          : null,
+        amount: shouldShowAmount ? Number(amount || 0) : null,
         message: message.trim(),
 
         cat_id: context?.catId || null,
@@ -116,7 +120,7 @@ export default function SupportForm({ mode = "donation", context = null }) {
           />
         </label>
 
-        {["donation", "member", "sponsor"].includes(mode) && (
+        {shouldShowAmount && (
           <label className="support-form__field">
             <span>{t("support_amount")}</span>
             <input

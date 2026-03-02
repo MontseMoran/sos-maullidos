@@ -1,6 +1,7 @@
 .about {
   position: relative;
-  padding: 48px 0 110px;
+  padding: 48px 0 145px;
+  
 }
 
 .about::before {
@@ -14,9 +15,10 @@
   background:
     radial-gradient(1100px 520px at 50% 0%, rgba(210, 190, 170, 0.55), rgba(210, 190, 170, 0) 65%),
     radial-gradient(900px 520px at 15% 25%, rgba(255, 245, 235, 0.95), rgba(255, 245, 235, 0) 60%),
-    radial-gradient(900px 520px at 85% 30%, rgba(255, 245, 235, 0.85), rgba(255, 245, 235, 0) 60%),
+    radial-gradient(900px 520px at 85% 30%, rgba(227, 208, 188, 0.85), rgba(255, 245, 235, 0) 60%),
     #f6efe7;
 }
+
 
 .about-hero,
 .about-section {
@@ -30,6 +32,7 @@
   border-radius: 26px;
   padding: 28px 20px 34px;
   margin-bottom: 26px;
+  margin-top: 18px;
   box-shadow: 0 14px 30px rgba(25, 18, 10, 0.10);
 }
 
@@ -64,12 +67,25 @@
 
 .about-section {
   position: relative;
-  background: rgba(255, 255, 255, 0.65);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(236, 220, 203, 0.68));
+  border: 1px solid rgba(105, 76, 51, 0.10);
   border-radius: 26px;
   padding: 24px 20px;
   margin: 0 auto 22px;
   box-shadow: 0 12px 26px rgba(25, 18, 10, 0.08);
   overflow: hidden;
+}
+
+.about > .about-section:nth-of-type(2n):not(.about-highlight) {
+  background: linear-gradient(145deg, rgba(255, 250, 244, 0.9), rgba(226, 206, 185, 0.70));
+}
+
+.about > .about-section:nth-of-type(2n + 1):not(.about-highlight) {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(241, 229, 216, 0.72));
+}
+
+.about > .about-section:last-of-type {
+  margin-bottom: 40px;
 }
 
 .about-section::after {
@@ -79,7 +95,7 @@
   right: -18px;
   width: 110px;
   height: 110px;
-  background: url("/images/paw.svg") no-repeat center;
+  background: url("/images/huella.svg") no-repeat center;
   background-size: contain;
   opacity: 0.05;
   pointer-events: none;
@@ -118,17 +134,20 @@
 }
 
 .about-highlight {
-  background: rgba(232, 178, 120, 0.18);
+  background: linear-gradient(145deg, rgba(255, 236, 212, 0.7), rgba(232, 178, 120, 0.32));
   border: 1px solid rgba(232, 178, 120, 0.35);
 }
 
+
 @media (min-width: 600px) {
   .about {
-    padding: 64px 0 130px;
+    padding: 64px 0 175px;
   }
 
   .about-hero {
     padding: 40px 36px 46px;
+    margin-top: 26px;
+    
   }
 
   .about-section {

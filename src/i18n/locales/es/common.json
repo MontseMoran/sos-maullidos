@@ -19,7 +19,8 @@
   "read_more": "Leer más",
   "read_less": "Leer menos",
 
-  "adoption_intro": "Estos gatos buscan un hogar definitivo donde sentirse seguros y queridos. Todos han sido rescatados y están preparados para comenzar una nueva vida. Adoptar es un compromiso para toda la vida.",
+   "adoption_intro": "Estos gatos buscan un hogar definitivo donde sentirse seguros y queridos. Todos han sido rescatados y están preparados para comenzar una nueva vida. Adoptar es un compromiso para toda la vida.\n\nAdoptando un gato salvarás a dos: el que adoptas, que pasará a formar parte de tu familia, y el que podrá ocupar su lugar en una casa de acogida.\n\nLos gatos se entregan en adopción con su chip, desparasitados y esterilizados (o con el compromiso de esterilización si todavía son demasiado jóvenes para poder operarlos).\n\nPara asegurar una buena adaptación a su nuevo hogar, realizamos una entrevista previa a la adopción y un seguimiento posterior.",
+
 
   "loading": "Cargando…",
   "adoption_empty": "Ahora mismo no hay gatos publicados.",
@@ -64,4 +65,5 @@
   "support_sponsor_title": "Amadrina un gato",
    "support_amount": "Importe mensual",
    "support_volunteer_title": "Sé parte del cambio"
+   
 }

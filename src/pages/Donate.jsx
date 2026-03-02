@@ -115,7 +115,7 @@ export default function Donate() {
 
             {open === "member" && (
               <div id="donate-member-form" className="donate__form">
-                <SupportForm mode="member" />
+                <SupportForm mode="member" showAmount={false} />
               </div>
             )}
           </section>
