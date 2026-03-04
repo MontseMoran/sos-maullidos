@@ -161,6 +161,7 @@
 
 .links.open {
   max-height: 700px;
+  overflow: visible;
   opacity: 1;
   transform: translateY(0);
   margin-top: 8px;
@@ -254,12 +255,17 @@
 }
 
 .caret {
-  color: rgba(0, 0, 0, 0.55);
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid rgba(0, 0, 0, 0.55);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.55);
+  transform: rotate(45deg);
+  margin-top: -2px;
   transition: transform 0.18s ease;
 }
 
 .drop-btn[aria-expanded="true"] .caret {
-  transform: rotate(180deg);
+  transform: rotate(-135deg);
 }
 
 .drop-panel {
@@ -283,6 +289,30 @@
 
 .drop-item:hover {
   background: rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 1023px) {
+  .dropdown {
+    position: relative;
+  }
+
+  .links-inner {
+    overflow: visible;
+  }
+
+  .drop-panel {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 10px);
+    min-width: 220px;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.14);
+    z-index: 20;
+  }
 }
 
 /* ============ OVERLAY ============
@@ -434,7 +464,6 @@
     box-shadow: 0 20px 46px rgba(0, 0, 0, 0.14);
   }
 
-  .dropdown:hover .drop-panel,
   .drop-panel.open {
     display: flex;
   }

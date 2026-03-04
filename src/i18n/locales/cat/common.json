@@ -1,6 +1,9 @@
 {
   "brand": "SOS Maullidos",
   "home": "Inici",
+  "cats": "Gats",
+  "cats_adoption": "En adopcio",
+  "cats_special_cases": "Casos especials",
   "adoption": "En adopció",
   "blog": "Blog",
   "news": "Notícies",

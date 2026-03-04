@@ -63,38 +63,6 @@ export default function Nav() {
                   {t("home")}
                 </NavLink>
 
-                <div className="dropdown" ref={catsRef}>
-                  <button
-                    className="drop-btn"
-                    aria-haspopup="true"
-                    aria-expanded={catsOpen}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCatsOpen((v) => !v);
-                    }}
-                  >
-                    {t("cats")} <span className="caret">â–¾</span>
-                  </button>
-
-                  <div className={`drop-panel ${catsOpen ? "open" : ""}`}>
-                    <NavLink
-                      to="/adopcion"
-                      className="drop-item"
-                      onClick={closeAll}
-                    >
-                      {t("cats_adoption")}
-                    </NavLink>
-
-                    <NavLink
-                      to="/casos-dificiles"
-                      className="drop-item"
-                      onClick={closeAll}
-                    >
-                      {t("cats_special_cases")}
-                    </NavLink>
-                  </div>
-                </div>
-
                 <NavLink
                   to="/blog"
                   className={navClass}
@@ -119,6 +87,38 @@ export default function Nav() {
                   {t("contact")}
                 </NavLink>
 
+                <div className="dropdown" ref={catsRef}>
+                  <button
+                    className="drop-btn nav-cta"
+                    aria-haspopup="true"
+                    aria-expanded={catsOpen}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCatsOpen((v) => !v);
+                    }}
+                  >
+                    {t("cats")} <span className="caret" aria-hidden="true" />
+                  </button>
+
+                  <div className={`drop-panel ${catsOpen ? "open" : ""}`}>
+                    <NavLink
+                      to="/adopcion"
+                      className="drop-item"
+                      onClick={closeAll}
+                    >
+                      {t("cats_adoption")}
+                    </NavLink>
+
+                    <NavLink
+                      to="/casos-dificiles"
+                      className="drop-item"
+                      onClick={closeAll}
+                    >
+                      {t("cats_special_cases")}
+                    </NavLink>
+                  </div>
+                </div>
+
                 {/* COM AJUDAR (dropdown) */}
                 <div className="dropdown" ref={helpRef}>
                   <button
@@ -130,7 +130,7 @@ export default function Nav() {
                       setHelpOpen((v) => !v);
                     }}
                   >
-                    {t("cta_how_help")} <span className="caret">▾</span>
+                    {t("cta_how_help")} <span className="caret" aria-hidden="true" />
                   </button>
 
                   <div className={`drop-panel ${helpOpen ? "open" : ""}`}>
