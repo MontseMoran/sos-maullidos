@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
-import "./supportForm.scss";
+import "./SupportForm.scss";
 
 
 export default function SupportForm({
