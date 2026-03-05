@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./BackLink.scss";
+import "./backLink.scss";
 
 export default function BackLink({ to }) {
   return (
