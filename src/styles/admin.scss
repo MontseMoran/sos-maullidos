@@ -258,6 +258,41 @@
   grid-column: 1 / -1;
 }
 
+.admin-image-preview {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin-top: 10px;
+}
+
+.admin-image-preview__img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+.admin-image-preview__remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.admin-image-preview__remove:hover {
+  background: rgba(180, 35, 24, 0.92);
+}
+
 .admin-btn-primary {
   background: var(--accent);
   color: white;

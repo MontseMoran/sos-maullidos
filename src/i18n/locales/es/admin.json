@@ -30,6 +30,7 @@
   "label_location": "Ubicación",
   "label_contact": "Contacto",
   "label_image": "Imagen",
+  "remove_selected_image": "Quitar imagen seleccionada",
   "status_en_adopcion": "En adopción",
   "status_caso_especial": "Caso especial",
   "btn_save": "Guardar",

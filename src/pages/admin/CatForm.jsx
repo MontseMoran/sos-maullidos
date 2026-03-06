@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -30,6 +30,8 @@ export default function CatForm() {
   const [existingImagePath, setExistingImagePath] = useState(""); //  para editar sin subir nueva foto
   const [saving, setSaving] = useState(false);
   const [loadingCat, setLoadingCat] = useState(false);
+  const fileInputRef = useRef(null);
+  const objectUrlRef = useRef("");
 
   // ======== CARGA DATOS EN MODO EDIT =========
   useEffect(() => {
@@ -114,16 +116,52 @@ export default function CatForm() {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      alert("Selecciona una imagen válida.");
+      alert("Selecciona una imagen vÃ¡lida.");
       return;
+    }
+
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+      objectUrlRef.current = "";
     }
 
     setImageFile(file);
     const url = URL.createObjectURL(file);
+    objectUrlRef.current = url;
     setImagePreview(url);
   };
 
-  //  resize + compresión (sin librerías)
+  const handleClearSelectedImage = () => {
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+      objectUrlRef.current = "";
+    }
+
+    setImageFile(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+
+    if (isEdit && existingImagePath) {
+      setExistingImagePath("");
+      setImagePreview("");
+      return;
+    }
+
+    setImagePreview("");
+  };
+
+  useEffect(() => {
+    return () => {
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+        objectUrlRef.current = "";
+      }
+    };
+  }, []);
+
+  //  resize + compresiÃ³n (sin librerÃ­as)
   const compressImage = (file, maxWidth = 1600, quality = 0.8) =>
     new Promise((resolve, reject) => {
       const img = new Image();
@@ -171,7 +209,7 @@ export default function CatForm() {
     try {
       let finalImagePath = existingImagePath;
 
-      // Si el usuario eligió nueva imagen, la subimos y sustituimos image_path
+      // Si el usuario eligiÃ³ nueva imagen, la subimos y sustituimos image_path
       if (imageFile) {
         const compressed = await compressImage(imageFile, 1600, 0.8);
 
@@ -196,7 +234,7 @@ export default function CatForm() {
         updated_at: new Date().toISOString(),
       };
 
-      // ✅ Editar vs Crear
+      // âœ… Editar vs Crear
       const res = isEdit
         ? await supabase.from("cats").update(payload).eq("id", id)
         : await supabase.from("cats").insert([payload]);
@@ -291,7 +329,7 @@ export default function CatForm() {
               value={form.description_cat}
               onChange={handleChange}
               maxLength={2000}
-              placeholder="Descriu aquí en català"
+              placeholder="Descriu aquÃ­ en catalÃ "
             />
           </div>
  <div className="full">
@@ -301,7 +339,7 @@ export default function CatForm() {
               value={form.description_es}
               onChange={handleChange}
               maxLength={2000}
-              placeholder="Describe aquí en castellano"
+              placeholder="Describe aquÃ­ en castellano"
             />
           </div>
           <div className="checkbox">
@@ -344,19 +382,27 @@ export default function CatForm() {
           <div className="full">
             <label>{t("label_image")}</label>
             <input
+              ref={fileInputRef}
               type="file"
               accept="image/*"
               onChange={handlePickImage}
-              // ✅ en editar NO obligamos a subir otra
+              // âœ… en editar NO obligamos a subir otra
               required={!isEdit}
             />
 
             {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="preview"
-                style={{ marginTop: 10, width: "100%", maxWidth: 420, borderRadius: 12 }}
-              />
+              <div className="admin-image-preview">
+                <img src={imagePreview} alt="preview" className="admin-image-preview__img" />
+                <button
+                  type="button"
+                  className="admin-image-preview__remove"
+                  onClick={handleClearSelectedImage}
+                  aria-label={t("remove_selected_image")}
+                  title={t("remove_selected_image")}
+                >
+                  ×
+                </button>
+              </div>
             )}
           </div>
 
@@ -370,3 +416,5 @@ export default function CatForm() {
     </div>
   );
 }
+
+
