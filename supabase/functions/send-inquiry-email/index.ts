@@ -1,4 +1,4 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+﻿import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 declare const Deno: {
   serve: (handler: (req: Request) => Response | Promise<Response>) => void;
@@ -34,6 +34,27 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function getModeLabel(mode?: string, lang?: string) {
+  const isCat = String(lang || "").toLowerCase().startsWith("cat");
+  const normalized = String(mode || "").toLowerCase();
+
+  if (isCat) {
+    if (normalized === "adoption") return "adoptar";
+    if (normalized === "sponsor") return "apadrinar";
+    if (normalized === "member") return "fer-se soci";
+    if (normalized === "volunteer") return "fer voluntariat";
+    if (normalized === "donation") return "fer una donacio";
+    return "enviar una sollicitud";
+  }
+
+  if (normalized === "adoption") return "adoptar";
+  if (normalized === "sponsor") return "amadrinar";
+  if (normalized === "member") return "hacerse socio";
+  if (normalized === "volunteer") return "hacer voluntariado";
+  if (normalized === "donation") return "hacer una donacion";
+  return "enviar una solicitud";
 }
 
 Deno.serve(async (req: Request) => {
@@ -83,24 +104,28 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    const subjectMode = payload.mode ? ` (${payload.mode})` : "";
-    const subject = `Nuevo formulario SOS Maullidos${subjectMode}`;
+    const modeLabel = getModeLabel(payload.mode, payload.lang);
+    const person = escapeHtml(payload.name || "Una persona");
+    const catName = escapeHtml(payload.cat_name || "un gato");
+    const subject = `SOS Maullidos: ${person} quiere ${modeLabel}`;
 
     const html = `
-      <h2>Nuevo formulario recibido</h2>
-      <p><strong>ID:</strong> ${escapeHtml(payload.inquiry_id || "-")}</p>
-      <p><strong>Fecha:</strong> ${escapeHtml(payload.created_at || "-")}</p>
-      <p><strong>Modo:</strong> ${escapeHtml(payload.mode || "-")}</p>
-      <p><strong>Idioma:</strong> ${escapeHtml(payload.lang || "-")}</p>
+      <h2>Hola SOS Maullidos,</h2>
+      <p><strong>${person}</strong> quiere <strong>${escapeHtml(modeLabel)}</strong>${payload.cat_name ? ` a <strong>${catName}</strong>` : ""}.</p>
       <hr />
-      <p><strong>Nombre:</strong> ${escapeHtml(payload.name || "-")}</p>
+      <p><strong>Nombre:</strong> ${person}</p>
       <p><strong>Email:</strong> ${escapeHtml(payload.email || "-")}</p>
-      <p><strong>Teléfono:</strong> ${escapeHtml(payload.phone || "-")}</p>
-      <p><strong>Importe:</strong> ${escapeHtml(String(payload.amount ?? "-"))}</p>
-      <p><strong>Gato ID:</strong> ${escapeHtml(payload.cat_id || "-")}</p>
-      <p><strong>Gato:</strong> ${escapeHtml(payload.cat_name || "-")}</p>
+      <p><strong>Telefono:</strong> ${escapeHtml(payload.phone || "-")}</p>
+      <p><strong>Gato:</strong> ${catName}</p>
+      ${payload.amount != null ? `<p><strong>Importe:</strong> ${escapeHtml(String(payload.amount))}</p>` : ""}
       <p><strong>Mensaje:</strong></p>
       <p>${escapeHtml(payload.message || "-").replaceAll("\n", "<br/>")}</p>
+      ${(payload.created_at || payload.inquiry_id) ? `
+        <hr />
+        <p style="color:#666;font-size:12px;">
+          Referencia interna${payload.created_at ? ` | Fecha: ${escapeHtml(payload.created_at)}` : ""}${payload.inquiry_id ? ` | ID: ${escapeHtml(payload.inquiry_id)}` : ""}
+        </p>
+      ` : ""}
     `;
 
     const resendResp = await fetch("https://api.resend.com/emails", {

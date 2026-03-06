@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import "./footer.scss";
 
 export default function Footer() {
@@ -26,6 +27,12 @@ export default function Footer() {
             >
               +34 644 359 605
             </a>
+          </div>
+
+          <div className="contact-small footer-legal">
+            <Link to="/privacidad">
+              {t("contact") === "Contacte" ? "Política de privacitat" : "Política de privacidad"}
+            </Link>
           </div>
         </div>
 

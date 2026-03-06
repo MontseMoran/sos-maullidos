@@ -1,0 +1,59 @@
+.privacy {
+  padding: 36px 0 80px;
+  background:
+    radial-gradient(900px 520px at 18% 0%, rgba(255, 190, 150, 0.22), transparent 60%),
+    radial-gradient(900px 520px at 82% 10%, rgba(255, 220, 190, 0.18), transparent 55%),
+    linear-gradient(180deg, rgb(218, 218, 217), rgba(252, 252, 250, 1));
+}
+
+.privacy__container {
+  width: min(92%, 980px);
+  margin: 0 auto;
+}
+
+.privacy__title {
+  margin: 0 0 12px;
+  font-size: 2.2rem;
+  color: #222;
+  letter-spacing: 0;
+}
+
+.privacy__intro {
+  margin: 0 0 16px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.privacy__section {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.788);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
+}
+
+.privacy__section h2 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  color: #222;
+}
+
+.privacy__section p {
+  margin: 0 0 7px;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.privacy__section a {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 1px;
+}
+
+@media (min-width: 900px) {
+  .privacy__section {
+    padding: 16px 18px;
+  }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
+import CookieBanner from "./components/CookieBanner/CookieBanner";
 import ScrollToTop from "./components/ScrollToTop";
 import PostDetail from "./pages/PostDetail";
 import Donate from "./pages/Donate";
@@ -24,6 +25,7 @@ import Volunteer  from "./pages/Volunteer";
 import Shop from "./pages/Shop";
 import Story from "./pages/Story";
 import LatestAdopted from "./pages/LatestAdopted";
+import Privacy from "./pages/Privacy";
 
 function SiteLayout() {
   return (
@@ -32,6 +34,7 @@ function SiteLayout() {
       <ScrollToTop />
       <Outlet />
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
@@ -69,6 +72,7 @@ export default function App() {
         <Route path="/compras-solidarias" element={<Shop />} />
         <Route path="/adopcion/:id" element={<CatDetail />} />
         <Route path="/historias/:slug" element={<Story />} />
+        <Route path="/privacidad" element={<Privacy />} />
         
       </Route>
     </Routes>

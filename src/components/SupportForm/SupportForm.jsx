@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import "./SupportForm.scss";
 
 
@@ -20,6 +21,7 @@ export default function SupportForm({
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
   const [sending, setSending] = useState(false);
   const [okMsg, setOkMsg] = useState("");
@@ -91,6 +93,7 @@ export default function SupportForm({
       setPhone("");
       setAmount("");
       setMessage("");
+      setAcceptedPrivacy(false);
 
     } catch (err) {
       console.error("SupportForm submit error:", err);
@@ -159,6 +162,32 @@ export default function SupportForm({
             onChange={(e) => setMessage(e.target.value)}
             required
           />
+        </label>
+
+        <label className="support-form__privacy support-form__field--full">
+          <input
+            type="checkbox"
+            checked={acceptedPrivacy}
+            onChange={(e) => setAcceptedPrivacy(e.target.checked)}
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                isCatLang
+                  ? "Has d'acceptar la política de privacitat per continuar."
+                  : "Debes aceptar la política de privacidad para continuar."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
+            required
+          />
+          <span>
+            {isCatLang
+              ? "He llegit i accepto la "
+              : "He leído y acepto la "}
+            <Link to="/privacidad">
+              {isCatLang ? "política de privacitat" : "política de privacidad"}
+            </Link>
+            .
+          </span>
         </label>
 
         {errMsg && (
