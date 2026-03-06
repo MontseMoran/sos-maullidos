@@ -173,6 +173,18 @@
   color: rgba(0, 0, 0, 0.72);
 }
 
+.cat-detail__desc strong {
+  font-weight: 700;
+}
+
+.cat-detail__desc em {
+  font-style: italic;
+}
+
+.cat-detail__desc u {
+  text-decoration: underline;
+}
+
 .cat-detail__desc--empty {
   color: rgba(0, 0, 0, 0.5);
 }

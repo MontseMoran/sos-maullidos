@@ -4,6 +4,7 @@ import { supabase } from "../../lib/supabaseClient";
 import { uploadImageFile } from "../../lib/storage";
 import { useTranslation } from "react-i18next";
 import { clearPostsCache } from "../../lib/postsCache";
+import RichTextEditor from "../../components/admin/RichTextEditor";
 
 export default function PostForm() {
   const { t } = useTranslation("admin");
@@ -65,6 +66,13 @@ const [form, setForm] = useState({
     setForm((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleRichChange = (name, value) => {
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 
@@ -180,19 +188,19 @@ const [form, setForm] = useState({
   placeholder={t("placeholder_excerpt_es")}
 />
 
-<label>{t("label_content_cat")}</label>
-<textarea
+<RichTextEditor
+  label={t("label_content_cat")}
   name="content_cat"
   value={form.content_cat}
-  onChange={onChange}
+  onChange={handleRichChange}
   placeholder={t("placeholder_content_cat")}
 />
 
-<label>{t("label_content_es")}</label>
-<textarea
+<RichTextEditor
+  label={t("label_content_es")}
   name="content_es"
   value={form.content_es}
-  onChange={onChange}
+  onChange={handleRichChange}
   placeholder={t("placeholder_content_es")}
 />
         <label>{t("label_date")}</label>

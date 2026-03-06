@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import "../styles/cats.scss";
 import { Link } from "react-router-dom";
 import { getPublishedCatsByStatus } from "../lib/catsCache";
+import { stripRichText } from "../lib/richText";
 
 
 function toValidDate(value) {
@@ -133,7 +134,8 @@ export default function Adoption() {
           <>
             <section className="adoption__grid" aria-label={t("adoption_list_aria")}>
               {visibleCats.map((cat, index) => {
-                const desc = (isCat ? cat.description_cat : cat.description_es) || cat.description_es || cat.description_cat || "";
+                const descRaw = (isCat ? cat.description_cat : cat.description_es) || cat.description_es || cat.description_cat || "";
+                const desc = stripRichText(descRaw);
                 const imgUrl = getCatImageUrl(cat.image_path);
                 const healthChips = getPositiveHealthChips(cat, t);
 

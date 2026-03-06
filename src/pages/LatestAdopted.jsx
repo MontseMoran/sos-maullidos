@@ -3,6 +3,7 @@ import { supabase } from "../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { getLatestAdoptedCats } from "../lib/catsCache";
+import { stripRichText } from "../lib/richText";
 import "../styles/cats.scss";
 
 function toValidDate(value) {
@@ -111,7 +112,8 @@ export default function LatestAdopted() {
         ) : (
           <section className="adoption__grid" aria-label={t("cats_latest_adopted_aria")}>
             {cats.map((cat, index) => {
-              const desc = (isCat ? cat.description_cat : cat.description_es) || cat.description_es || cat.description_cat || "";
+              const descRaw = (isCat ? cat.description_cat : cat.description_es) || cat.description_es || cat.description_cat || "";
+              const desc = stripRichText(descRaw);
               const imgUrl = getCatImageUrl(cat.image_path);
               const healthChips = getPositiveHealthChips(cat, t);
 

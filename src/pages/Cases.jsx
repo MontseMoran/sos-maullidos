@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "../lib/supabaseClient";
 import { Link } from "react-router-dom";
 import { getPublishedCatsByStatus } from "../lib/catsCache";
+import { stripRichText } from "../lib/richText";
 import "../styles/cats.scss";
 
 function toValidDate(value) {
@@ -107,11 +108,12 @@ export default function Cases() {
         ) : (
           <section className="adoption__grid" aria-label={t("cats_special_cases")}>
             {cats.map((cat, index) => {
-              const desc =
+              const descRaw =
                 (isCat ? cat.description_cat : cat.description_es) ||
                 cat.description_es ||
                 cat.description_cat ||
                 "";
+              const desc = stripRichText(descRaw);
 
               const imageUrl = cat.image_path
                 ? supabase.storage

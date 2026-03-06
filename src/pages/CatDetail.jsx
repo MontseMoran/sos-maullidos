@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../lib/supabaseClient";
 import { getPublishedCatById } from "../lib/catsCache";
+import { toRichTextHtml } from "../lib/richText";
 import "../styles/catDetail.scss";
 import BackLink from "../components/backLink/BackLink";
 import SupportForm from "../components/SupportForm/SupportForm";
@@ -203,7 +204,10 @@ export default function CatDetail() {
             </div>
 
             {desc ? (
-              <p className="cat-detail__desc">{desc}</p>
+              <div
+                className="cat-detail__desc"
+                dangerouslySetInnerHTML={{ __html: toRichTextHtml(desc) }}
+              />
             ) : (
               <p className="cat-detail__desc cat-detail__desc--empty">
                 {t("description_empty")}

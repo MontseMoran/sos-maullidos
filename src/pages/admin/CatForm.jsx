@@ -3,6 +3,7 @@ import { supabase } from "../../lib/supabaseClient";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { clearCatsCache } from "../../lib/catsCache";
+import RichTextEditor from "../../components/admin/RichTextEditor";
 
 function supportModeToFlags(mode) {
   if (mode === "adoption_only") return { adoption: true, sponsor: false };
@@ -154,6 +155,13 @@ export default function CatForm() {
     const url = URL.createObjectURL(file);
     objectUrlRef.current = url;
     setImagePreview(url);
+  };
+
+  const handleRichChange = (name, value) => {
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSpecialSupportToggle = (type) => {
@@ -407,23 +415,25 @@ export default function CatForm() {
           )}
 
           <div className="full">
-            <label>{t("label_description_cat")}</label>
-            <textarea
+            <RichTextEditor
+              label={t("label_description_cat")}
               name="description_cat"
               value={form.description_cat}
-              onChange={handleChange}
+              onChange={handleRichChange}
               maxLength={2000}
               placeholder="Descriu aquí en català"
+              rows={5}
             />
           </div>
  <div className="full">
-            <label>{t("label_description_es")}</label>
-            <textarea
+            <RichTextEditor
+              label={t("label_description_es")}
               name="description_es"
               value={form.description_es}
-              onChange={handleChange}
+              onChange={handleRichChange}
               maxLength={2000}
               placeholder="Describe aquí en castellano"
+              rows={5}
             />
           </div>
           <div className="checkbox">

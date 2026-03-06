@@ -25,7 +25,18 @@
   font-size: 1rem;
   line-height: 1.7;
   color: #444;
-  white-space: pre-line;
+}
+
+.postDetail__content strong {
+  font-weight: 700;
+}
+
+.postDetail__content em {
+  font-style: italic;
+}
+
+.postDetail__content u {
+  text-decoration: underline;
 }
 .postDetail__media{
   margin-bottom: 18px;

@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
 import { getPublishedPostById } from "../lib/postsCache";
+import { toRichTextHtml } from "../lib/richText";
 import "../styles/postDetail.scss";
 import BackLink from "../components/backLink/BackLink";
 
@@ -70,9 +71,10 @@ const allowedTypesKey = allowedTypes.join(",");
 
         <h1 className="postDetail__title">{title}</h1>
 
-        <div className="postDetail__content">
-          {content}
-        </div>
+        <div
+          className="postDetail__content"
+          dangerouslySetInnerHTML={{ __html: toRichTextHtml(content) }}
+        />
 
       </div>
     </main>
