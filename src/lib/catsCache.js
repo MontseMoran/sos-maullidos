@@ -93,7 +93,7 @@ export async function getPublishedCatById(id) {
   return withCache(key, async () => {
     const { data, error } = await supabase
       .from("cats")
-      .select(CAT_SELECT)
+      .select("*")
       .eq("id", id)
       .eq("published", true)
       .maybeSingle();

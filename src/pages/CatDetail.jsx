@@ -80,6 +80,11 @@ function getStatusLabel(status, t) {
   return status.replaceAll("_", " ");
 }
 
+function getSpecialSupportMode(cat) {
+  if (cat?.status !== "caso_especial") return "adoption_only";
+  return cat?.special_support_mode || "both";
+}
+
 export default function CatDetail() {
   const { id } = useParams();
   const { t, i18n } = useTranslation("common");
@@ -138,6 +143,17 @@ export default function CatDetail() {
   const imgUrl = getCatImageUrl(cat.image_path);
   const isCat = i18n.language === "cat";
   const healthChips = getPositiveHealthChips(cat, t);
+  const specialSupportMode = getSpecialSupportMode(cat);
+  const showAdoptionForm =
+    specialSupportMode === "adoption_only" || specialSupportMode === "both";
+  const showSponsorForm =
+    specialSupportMode === "sponsor_only" || specialSupportMode === "both";
+  const openCtaLabel =
+    specialSupportMode === "sponsor_only"
+      ? `${t("support_sponsor_title")}: ${cat.name}`
+      : specialSupportMode === "both"
+        ? `${t("adopt_cta_open", { name: cat.name })} + ${t("support_sponsor_title")}`
+        : t("adopt_cta_open", { name: cat.name });
 
   const desc = (
     isCat
@@ -199,7 +215,7 @@ export default function CatDetail() {
               <span>
                 {isOpen
                   ? t("adopt_cta_close")
-                  : t("adopt_cta_open", { name: cat.name })}
+                  : openCtaLabel}
               </span>
 
               <span className="cat-detail__ctaIcon">
@@ -209,11 +225,20 @@ export default function CatDetail() {
 
             {isOpen && (
               <div className="cat-detail__adoptPanel" ref={adoptRef}>
-                <SupportForm
-                  mode="adoption"
-                  context={{ catId: cat.id, catName: cat.name }}
-                  onSuccess={() => setIsOpen(false)}
-                />
+                {showAdoptionForm && (
+                  <SupportForm
+                    mode="adoption"
+                    context={{ catId: cat.id, catName: cat.name }}
+                    onSuccess={() => setIsOpen(false)}
+                  />
+                )}
+                {showSponsorForm && (
+                  <SupportForm
+                    mode="sponsor"
+                    context={{ catId: cat.id, catName: cat.name }}
+                    onSuccess={() => setIsOpen(false)}
+                  />
+                )}
               </div>
             )}
           </div>

@@ -4,6 +4,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { clearCatsCache } from "../../lib/catsCache";
 
+function supportModeToFlags(mode) {
+  if (mode === "adoption_only") return { adoption: true, sponsor: false };
+  if (mode === "sponsor_only") return { adoption: false, sponsor: true };
+  return { adoption: true, sponsor: true };
+}
+
+function flagsToSupportMode(adoption, sponsor) {
+  if (adoption && sponsor) return "both";
+  if (adoption) return "adoption_only";
+  if (sponsor) return "sponsor_only";
+  return "adoption_only";
+}
+
 export default function CatForm() {
   const { t } = useTranslation("admin");
   const nav = useNavigate();
@@ -23,6 +36,7 @@ export default function CatForm() {
     tested: false,
     fiv_result: "unknown",
     felv_result: "unknown",
+    special_support_mode: "both",
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -67,6 +81,7 @@ export default function CatForm() {
         tested: Boolean(data?.tested),
         fiv_result: data?.fiv_result ?? "unknown",
         felv_result: data?.felv_result ?? "unknown",
+        special_support_mode: data?.special_support_mode ?? "both",
       });
 
       // Imagen
@@ -104,6 +119,16 @@ export default function CatForm() {
         };
       }
 
+      if (name === "status") {
+        const nextStatus = value;
+        return {
+          ...prev,
+          status: nextStatus,
+          special_support_mode:
+            nextStatus === "caso_especial" ? prev.special_support_mode : "adoption_only",
+        };
+      }
+
       return {
         ...prev,
         [name]: type === "checkbox" ? checked : value,
@@ -116,7 +141,7 @@ export default function CatForm() {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      alert("Selecciona una imagen vÃ¡lida.");
+      alert("Selecciona una imagen válida.");
       return;
     }
 
@@ -129,6 +154,25 @@ export default function CatForm() {
     const url = URL.createObjectURL(file);
     objectUrlRef.current = url;
     setImagePreview(url);
+  };
+
+  const handleSpecialSupportToggle = (type) => {
+    setForm((prev) => {
+      const flags = supportModeToFlags(prev.special_support_mode);
+      const next = {
+        ...flags,
+        [type]: !flags[type],
+      };
+
+      if (!next.adoption && !next.sponsor) {
+        next.adoption = true;
+      }
+
+      return {
+        ...prev,
+        special_support_mode: flagsToSupportMode(next.adoption, next.sponsor),
+      };
+    });
   };
 
   const handleClearSelectedImage = () => {
@@ -161,7 +205,7 @@ export default function CatForm() {
     };
   }, []);
 
-  //  resize + compresiÃ³n (sin librerÃ­as)
+  //  resize + compresión (sin librerías)
   const compressImage = (file, maxWidth = 1600, quality = 0.8) =>
     new Promise((resolve, reject) => {
       const img = new Image();
@@ -209,7 +253,7 @@ export default function CatForm() {
     try {
       let finalImagePath = existingImagePath;
 
-      // Si el usuario eligiÃ³ nueva imagen, la subimos y sustituimos image_path
+      // Si el usuario eligió nueva imagen, la subimos y sustituimos image_path
       if (imageFile) {
         const compressed = await compressImage(imageFile, 1600, 0.8);
 
@@ -234,10 +278,26 @@ export default function CatForm() {
         updated_at: new Date().toISOString(),
       };
 
-      // âœ… Editar vs Crear
-      const res = isEdit
-        ? await supabase.from("cats").update(payload).eq("id", id)
-        : await supabase.from("cats").insert([payload]);
+      const saveCat = (nextPayload) =>
+        isEdit
+          ? supabase.from("cats").update(nextPayload).eq("id", id)
+          : supabase.from("cats").insert([nextPayload]);
+
+      // Editar vs Crear
+      let res = await saveCat(payload);
+
+      const missingSupportModeColumn =
+        res?.error &&
+        /special_support_mode/i.test(String(res.error.message || ""));
+
+      if (missingSupportModeColumn) {
+        const { special_support_mode, ...legacyPayload } = payload;
+        res = await saveCat(legacyPayload);
+
+        if (!res.error) {
+          alert(t("special_support_mode_missing_column_notice"));
+        }
+      }
 
       if (res.error) {
         alert(res.error.message);
@@ -322,6 +382,30 @@ export default function CatForm() {
             </select>
           </div>
 
+          {form.status === "caso_especial" && (
+            <div>
+              <label>{t("label_special_support_mode")}</label>
+              <div className="admin-radioRow">
+                <label className="admin-radio">
+                  <input
+                    type="checkbox"
+                    checked={supportModeToFlags(form.special_support_mode).adoption}
+                    onChange={() => handleSpecialSupportToggle("adoption")}
+                  />
+                  {t("special_support_adoption_only")}
+                </label>
+                <label className="admin-radio">
+                  <input
+                    type="checkbox"
+                    checked={supportModeToFlags(form.special_support_mode).sponsor}
+                    onChange={() => handleSpecialSupportToggle("sponsor")}
+                  />
+                  {t("special_support_sponsor_only")}
+                </label>
+              </div>
+            </div>
+          )}
+
           <div className="full">
             <label>{t("label_description_cat")}</label>
             <textarea
@@ -329,7 +413,7 @@ export default function CatForm() {
               value={form.description_cat}
               onChange={handleChange}
               maxLength={2000}
-              placeholder="Descriu aquÃ­ en catalÃ "
+              placeholder="Descriu aquí en català"
             />
           </div>
  <div className="full">
@@ -339,7 +423,7 @@ export default function CatForm() {
               value={form.description_es}
               onChange={handleChange}
               maxLength={2000}
-              placeholder="Describe aquÃ­ en castellano"
+              placeholder="Describe aquí en castellano"
             />
           </div>
           <div className="checkbox">
@@ -386,7 +470,7 @@ export default function CatForm() {
               type="file"
               accept="image/*"
               onChange={handlePickImage}
-              // âœ… en editar NO obligamos a subir otra
+              // en editar NO obligamos a subir otra
               required={!isEdit}
             />
 
