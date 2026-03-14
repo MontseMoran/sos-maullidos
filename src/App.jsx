@@ -42,7 +42,7 @@ function SiteLayout() {
 export default function App() {
   return (
     <Routes>
-      {/* ADMIN: sin Nav/Footer */}
+     
       <Route path="/admin/login" element={<Login />} />
 
       <Route path="/admin" element={<AdminLayout />}>
@@ -55,7 +55,7 @@ export default function App() {
         <Route path="posts/:id/edit" element={<PostForm />} />
       </Route>
 
-      {/* PUBLICO: con Nav/Footer */}
+     
       <Route path="/" element={<SiteLayout />}>
         <Route index element={<Home />} />
         <Route path="adopcion" element={<Adoption />} />
