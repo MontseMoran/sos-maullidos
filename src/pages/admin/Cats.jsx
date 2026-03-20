@@ -134,27 +134,34 @@ export default function Cats() {
       alert("Error: " + err.message);
     }
   };
+  function getStatusLabel(status) {
+    if (status === "en_adopcion") return "En adopcion";
+    if (status === "caso_especial") return "Caso especial";
+    if (status === "adoptado") return "Adoptado";
+    if (status === "baja") return "Baja";
+    return status || "";
+  }
 
   return (
     <div>
       <h2>{t("admin_cats")}</h2>
 
-     <div className="admin-top-actions">
-  <Link
-    to="/admin/cats/new"
-    className="admin-action admin-action--primary"
-  >
-    {t("admin_create")}
-  </Link>
+      <div className="admin-top-actions">
+        <Link
+          to="/admin/cats/new"
+          className="admin-action admin-action--primary"
+        >
+          {t("admin_create")}
+        </Link>
 
-  <button
-    type="button"
-    className="admin-action admin-action--ghost"
-    onClick={() => nav("/")}
-  >
-    {t("admin_view_public")}
-  </button>
-</div>
+        <button
+          type="button"
+          className="admin-action admin-action--ghost"
+          onClick={() => nav("/")}
+        >
+          {t("admin_view_public")}
+        </button>
+      </div>
 
       {loading ? (
         <p>{t("admin_loading")}</p>
@@ -175,6 +182,9 @@ export default function Cats() {
 
               <h4>{cat.name}</h4>
               <p>{cat.age_text}</p>
+              <p>
+                 {cat.status ? t(`status_${cat.status}`) : "Sin estado"}
+              </p>
 
               <div className="actions">
                 <Link
