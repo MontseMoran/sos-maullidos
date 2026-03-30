@@ -1,4 +1,17 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "sosmaullidos.org"
+        }
+      ],
+      "destination": "https://www.sosmaullidos.org/:path*",
+      "permanent": true
+    }
+  ],
   "routes": [
     {
       "handle": "filesystem"

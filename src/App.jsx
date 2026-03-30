@@ -4,6 +4,7 @@ import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import CookieBanner from "./components/CookieBanner/CookieBanner";
 import ScrollToTop from "./components/ScrollToTop";
+import Seo from "./components/Seo";
 import PostDetail from "./pages/PostDetail";
 import Donate from "./pages/Donate";
 import Home from "./pages/Home";
@@ -30,6 +31,7 @@ import Privacy from "./pages/Privacy";
 function SiteLayout() {
   return (
     <div className="app">
+      <Seo />
       <Nav />
       <ScrollToTop />
       <Outlet />
@@ -42,10 +44,25 @@ function SiteLayout() {
 export default function App() {
   return (
     <Routes>
-     
-      <Route path="/admin/login" element={<Login />} />
+      <Route
+        path="/admin/login"
+        element={
+          <>
+            <Seo />
+            <Login />
+          </>
+        }
+      />
 
-      <Route path="/admin" element={<AdminLayout />}>
+      <Route
+        path="/admin"
+        element={
+          <>
+            <Seo />
+            <AdminLayout />
+          </>
+        }
+      >
         <Route index element={<Dashboard />} />
         <Route path="cats" element={<Cats />} />
         <Route path="cats/new" element={<CatForm />} />
@@ -55,7 +72,6 @@ export default function App() {
         <Route path="posts/:id/edit" element={<PostForm />} />
       </Route>
 
-     
       <Route path="/" element={<SiteLayout />}>
         <Route index element={<Home />} />
         <Route path="adopcion" element={<Adoption />} />
