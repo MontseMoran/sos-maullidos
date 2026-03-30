@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { loadTurnstileScript } from "../../lib/turnstile";
 import "./SupportForm.scss";
 
 
@@ -22,11 +23,17 @@ export default function SupportForm({
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+  const [website, setWebsite] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaReady, setCaptchaReady] = useState(false);
 
   const [sending, setSending] = useState(false);
   const [okMsg, setOkMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [warnMsg, setWarnMsg] = useState("");
+  const turnstileRef = useRef(null);
+  const turnstileWidgetId = useRef(null);
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
   const title = useMemo(() => {
     if (mode === "volunteer") return t("support_volunteer_title");
@@ -40,6 +47,57 @@ export default function SupportForm({
   const shouldShowAmount =
     showAmount ?? ["donation", "member"].includes(mode);
 
+  useEffect(() => {
+    if (!turnstileSiteKey || !turnstileRef.current) {
+      setCaptchaReady(false);
+      return;
+    }
+
+    let cancelled = false;
+
+    loadTurnstileScript()
+      .then((turnstile) => {
+        if (cancelled || !turnstileRef.current) return;
+
+        if (turnstileWidgetId.current !== null) {
+          turnstile.remove(turnstileWidgetId.current);
+          turnstileWidgetId.current = null;
+        }
+
+        turnstileWidgetId.current = turnstile.render(turnstileRef.current, {
+          sitekey: turnstileSiteKey,
+          theme: "light",
+          callback: (token) => {
+            setCaptchaToken(token);
+            setErrMsg("");
+          },
+          "expired-callback": () => {
+            setCaptchaToken("");
+          },
+          "error-callback": () => {
+            setCaptchaToken("");
+            setCaptchaReady(false);
+            setErrMsg(t("support_captcha_load_error"));
+          },
+        });
+
+        setCaptchaReady(true);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setCaptchaReady(false);
+        setErrMsg(t("support_captcha_load_error"));
+      });
+
+    return () => {
+      cancelled = true;
+
+      if (window.turnstile && turnstileWidgetId.current !== null) {
+        window.turnstile.remove(turnstileWidgetId.current);
+        turnstileWidgetId.current = null;
+      }
+    };
+  }, [t, turnstileSiteKey]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,6 +106,18 @@ export default function SupportForm({
     setErrMsg("");
     setOkMsg("");
     setWarnMsg("");
+
+    if (!turnstileSiteKey) {
+      setErrMsg(t("support_captcha_missing"));
+      setSending(false);
+      return;
+    }
+
+    if (!captchaToken) {
+      setErrMsg(t("support_captcha_required"));
+      setSending(false);
+      return;
+    }
 
     try {
       const payload = {
@@ -62,27 +132,24 @@ export default function SupportForm({
         cat_name: context?.catName || null,
 
         lang: isCatLang ? "cat" : "es",
+        turnstileToken: captchaToken,
+        website: website.trim(),
       };
 
-      const { error } = await supabase
-        .from("inquiries")
-        .insert([payload]);
-
-      if (error) throw error;
-
-      const { error: notifyError } = await supabase.functions.invoke(
+      const { data, error } = await supabase.functions.invoke(
         "send-inquiry-email",
         {
-          body: {
-            ...payload,
-            inquiry_id: null,
-            created_at: null,
-          },
+          body: payload,
         }
       );
 
-      if (notifyError) {
-        console.error("send-inquiry-email invoke error:", notifyError);
+      if (error) throw error;
+
+      if (!data?.ok) {
+        throw new Error(data?.error || "Unexpected response");
+      }
+
+      if (!data?.email_sent) {
         setWarnMsg(t("support_notice_email_failed"));
       }
 
@@ -94,10 +161,21 @@ export default function SupportForm({
       setAmount("");
       setMessage("");
       setAcceptedPrivacy(false);
+      setWebsite("");
+      setCaptchaToken("");
+
+      if (window.turnstile && turnstileWidgetId.current !== null) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
 
     } catch (err) {
       console.error("SupportForm submit error:", err);
       setErrMsg(t("support_sent_error"));
+
+      if (window.turnstile && turnstileWidgetId.current !== null) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
+      setCaptchaToken("");
     } finally {
       setSending(false);
     }
@@ -190,6 +268,30 @@ export default function SupportForm({
           </span>
         </label>
 
+        <label
+          className="support-form__field support-form__field--full"
+          style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}
+          aria-hidden="true"
+        >
+          <span>Website</span>
+          <input
+            tabIndex="-1"
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </label>
+
+        <div className="support-form__field support-form__field--full">
+          <span>{t("support_captcha_label")}</span>
+          <div ref={turnstileRef} />
+          {!captchaReady && (
+            <div className="support-form__msg support-form__msg--warn">
+              {t("support_captcha_loading")}
+            </div>
+          )}
+        </div>
+
         {errMsg && (
           <div className="support-form__msg support-form__msg--err">
             {errMsg}
@@ -210,7 +312,7 @@ export default function SupportForm({
 
         <button
           className="support-form__btn cat-card__readmore"
-          disabled={sending}
+          disabled={sending || !turnstileSiteKey}
         >
           {sending
             ? t("support_sending")

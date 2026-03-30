@@ -25,6 +25,8 @@ type InquiryPayload = {
   lang?: string;
   inquiry_id?: string | null;
   created_at?: string | null;
+  turnstileToken?: string;
+  website?: string;
 };
 
 function escapeHtml(value: string) {
@@ -57,6 +59,85 @@ function getModeLabel(mode?: string, lang?: string) {
   return "enviar una solicitud";
 }
 
+function isValidEmail(value?: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+}
+
+async function verifyTurnstile(token: string, ip?: string | null) {
+  const secret = Deno.env.get("TURNSTILE_SECRET_KEY");
+
+  if (!secret) {
+    throw new Error("Missing TURNSTILE_SECRET_KEY secret");
+  }
+
+  const body = new URLSearchParams({
+    secret,
+    response: token,
+  });
+
+  if (ip) {
+    body.set("remoteip", ip);
+  }
+
+  const response = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: body.toString(),
+    }
+  );
+
+  const data = await response.json();
+
+  return {
+    ok: response.ok && Boolean(data?.success),
+    data,
+  };
+}
+
+async function insertInquiry(payload: InquiryPayload) {
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    throw new Error("Missing Supabase service role configuration");
+  }
+
+  const insertPayload = {
+    mode: payload.mode,
+    name: payload.name,
+    email: payload.email,
+    phone: payload.phone || null,
+    amount: payload.amount ?? null,
+    message: payload.message,
+    cat_id: payload.cat_id || null,
+    cat_name: payload.cat_name || null,
+    lang: payload.lang || "es",
+  };
+
+  const response = await fetch(`${supabaseUrl}/rest/v1/inquiries`, {
+    method: "POST",
+    headers: {
+      apikey: serviceRoleKey,
+      Authorization: `Bearer ${serviceRoleKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(insertPayload),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(`Supabase insert error: ${JSON.stringify(data)}`);
+  }
+
+  return Array.isArray(data) ? data[0] : data;
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -74,6 +155,9 @@ Deno.serve(async (req: Request) => {
 
   try {
     const payload = (await req.json()) as InquiryPayload;
+    const clientIp =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("cf-connecting-ip");
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     const senderEmail = Deno.env.get("INQUIRY_SENDER_EMAIL") || "onboarding@resend.dev";
     const recipientsRaw = Deno.env.get("INQUIRY_RECIPIENTS") ||
@@ -84,6 +168,50 @@ Deno.serve(async (req: Request) => {
         JSON.stringify({ error: "Missing RESEND_API_KEY secret" }),
         {
           status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (String(payload.website || "").trim()) {
+      return new Response(
+        JSON.stringify({ error: "Spam detected" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (
+      !payload.mode ||
+      !payload.name ||
+      !payload.message ||
+      !isValidEmail(payload.email) ||
+      !payload.turnstileToken
+    ) {
+      return new Response(
+        JSON.stringify({ error: "Invalid payload" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const turnstileCheck = await verifyTurnstile(
+      payload.turnstileToken,
+      clientIp,
+    );
+
+    if (!turnstileCheck.ok) {
+      return new Response(
+        JSON.stringify({
+          error: "Invalid captcha",
+          details: turnstileCheck.data,
+        }),
+        {
+          status: 400,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         }
       );
@@ -104,6 +232,8 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    const inquiry = await insertInquiry(payload);
+
     const modeLabel = getModeLabel(payload.mode, payload.lang);
     const person = escapeHtml(payload.name || "Una persona");
     const catName = escapeHtml(payload.cat_name || "un gato");
@@ -120,10 +250,10 @@ Deno.serve(async (req: Request) => {
       ${payload.amount != null ? `<p><strong>Importe:</strong> ${escapeHtml(String(payload.amount))}</p>` : ""}
       <p><strong>Mensaje:</strong></p>
       <p>${escapeHtml(payload.message || "-").replaceAll("\n", "<br/>")}</p>
-      ${(payload.created_at || payload.inquiry_id) ? `
+      ${(inquiry?.created_at || inquiry?.id) ? `
         <hr />
         <p style="color:#666;font-size:12px;">
-          Referencia interna${payload.created_at ? ` | Fecha: ${escapeHtml(payload.created_at)}` : ""}${payload.inquiry_id ? ` | ID: ${escapeHtml(payload.inquiry_id)}` : ""}
+          Referencia interna${inquiry?.created_at ? ` | Fecha: ${escapeHtml(inquiry.created_at)}` : ""}${inquiry?.id ? ` | ID: ${escapeHtml(inquiry.id)}` : ""}
         </p>
       ` : ""}
     `;
@@ -145,16 +275,26 @@ Deno.serve(async (req: Request) => {
     const resendData = await resendResp.json();
     if (!resendResp.ok) {
       return new Response(
-        JSON.stringify({ error: "Resend error", details: resendData }),
+        JSON.stringify({
+          ok: true,
+          email_sent: false,
+          inquiry_id: inquiry?.id || null,
+          details: resendData,
+        }),
         {
-          status: 502,
+          status: 200,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         }
       );
     }
 
     return new Response(
-      JSON.stringify({ ok: true, email_id: resendData?.id || null }),
+      JSON.stringify({
+        ok: true,
+        email_sent: true,
+        inquiry_id: inquiry?.id || null,
+        email_id: resendData?.id || null,
+      }),
       {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

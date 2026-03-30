@@ -74,6 +74,11 @@
   "support_sent_ok": "Sol·licitud enviada correctament.",
   "support_sent_error": "No s'ha pogut enviar la sol·licitud. Torna-ho a provar.",
   "support_notice_email_failed": "Sol·licitud guardada, però no s'ha pogut enviar l'avís per correu.",
+  "support_captcha_label": "Verificació anti-spam",
+  "support_captcha_loading": "Carregant la verificació de seguretat…",
+  "support_captcha_required": "Completa la verificació de seguretat abans d'enviar.",
+  "support_captcha_load_error": "No s'ha pogut carregar la verificació de seguretat. Recarrega la pàgina i torna-ho a provar.",
+  "support_captcha_missing": "El formulari encara no està configurat per a la verificació anti-spam.",
   "support_close": "Tancar formulari",
 
   "support_message_placeholder": "Explica’ns una mica sobre tu i per què vols adoptar aquest gat...",

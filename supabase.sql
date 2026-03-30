@@ -73,10 +73,8 @@ CREATE POLICY "Public select published cats" ON public.cats
 CREATE POLICY "Public select published posts" ON public.posts
   FOR SELECT USING (published = true);
 
--- Allow insert on inquiries from public forms
-CREATE POLICY "Public insert inquiries" ON public.inquiries
-  FOR INSERT
-  WITH CHECK (true);
+-- Public inquiries must go through the Edge Function after captcha verification.
+DROP POLICY IF EXISTS "Public insert inquiries" ON public.inquiries;
 
 -- Admin policies: allow insert/update/delete for admins
 -- Requires that `profiles` table maps auth user id to role 'admin'
